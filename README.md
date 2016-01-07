@@ -52,3 +52,19 @@ rope('What %0 is to %1, %2 is to %3. This is what makes %2 so powerful')
 .value;
 // -> WhatSPLICE lodash is to Arrays, Rope is to Strings. This is what makes Rope so powerful
 ```
+
+### Adding your own methods to `rope`
+
+In the `strung` object you have access to all the other `rope` methods. The value you have to mutate to the be compatible to the other methods is `strung.value`
+
+```javascript
+rope.fn.kebabCase = function (strung) {
+  strung.value = strung.value.split(/ |_|-/).join('-').split('').map(function (a) {
+    if (a.toUpperCase() === a && a !== '-') {
+      return '-' + a.toLowerCase();
+    }
+    return a;
+  }).join('').toLowerCase();
+  return strung;
+};
+```
