@@ -46,6 +46,9 @@ rope.indexesOf('Check out where the indexes of \'e\' are', /e/);
 ### Chain methods together
 
 ```javascript
-rope('What %0 is to %1, %2 is to %3. This is what makes %2 so powerful').template('lodash', 'Arrays', 'Rope', 'Strings').splice(4, 0, 'SPLICE').value;
+rope('What %0 is to %1, %2 is to %3. This is what makes %2 so powerful')
+.template('lodash', 'Arrays', 'Rope', 'Strings')
+.splice(4, 0, 'SPLICE')
+.value;
 // -> WhatSPLICE lodash is to Arrays, Rope is to Strings. This is what makes Rope so powerful
 ```
