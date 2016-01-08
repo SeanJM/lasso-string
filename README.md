@@ -1,5 +1,5 @@
 ## Rope
-#### What lodash is to Arrays, Rope is to Strings
+#### An interface for editing strings
 
 ## Methods
 
