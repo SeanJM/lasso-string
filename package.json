@@ -3,30 +3,35 @@
   "title": "Lasso",
   "description": "A function with methods to manipulate strings and get information about strings.",
   "version": "1.0.0",
-  "author" : {
-    "name" : "Sean MacIsaac",
-    "email" : "seanjmacisaac@gmail.com"
+  "author": {
+    "name": "Sean MacIsaac",
+    "email": "seanjmacisaac@gmail.com"
   },
-  "repository" : {
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/SeanJM/lasso.git"
   },
-  "license": "GNU 3",
+  "license": "MIT",
   "keywords": [
     "CommonJS",
     "string",
     "manipulation"
   ],
-  "main" : "lasso.min.js",
+  "main": "lasso.min.js",
   "bugs": {
     "url": "https://github.com/SeanJM/rope/issues"
   },
+  "scripts" : {
+    "test" : "mocha lasso.min.test.js"
+  },
   "homepage": "https://github.com/SeanJM/rope",
   "devDependencies": {
+    "chai": "^3.4.1",
     "grunt": "^0.4.5",
     "grunt-autoprefixer": "^1.0.0",
     "grunt-cli": "^0.1.13",
     "grunt-contrib-uglify": "~0.5.0",
-    "grunt-contrib-watch": "^0.6.1"
+    "grunt-contrib-watch": "^0.6.1",
+    "mocha": "^2.3.4"
   }
 }

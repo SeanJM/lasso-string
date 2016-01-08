@@ -59,7 +59,7 @@ rope('What is %0?')
 // -> WSPLICEhat is Rope?
 ```
 
-### Adding your own methods to `rope`
+### Adding your own methods to `lasso`
 
 In the `strung` object you have access to all the other `rope` methods. The value you have to mutate to the be compatible to the other methods is `strung.value`
 

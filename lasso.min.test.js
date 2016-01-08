@@ -1,0 +1,39 @@
+var should = require('chai').should();
+var lasso = require('./lasso.min.js');
+
+describe('Testing the string functions', function () {
+  it('lasso.jsCase: Converts invalid JavaScript names to valid names', function () {
+    lasso.jsCase('Let\'s convert this').should.equal('letsConvertThis');
+  });
+  it('lasso.splice: Splices a string into another string', function () {
+    lasso.splice('AB', 1, 0, '-text-').should.equal('A-text-B');
+  });
+  it('lasso.template: Templates a string with indexes or non indexed values', function () {
+    lasso.template('This %s equal some value %1', 'should', 'like this').should.equal('This should equal some value like this');
+  });
+  it('lasso.toCharCode: Returns an array of mapped character values', function () {
+    lasso.toCharCode('Lasso').should.eql([76, 97, 115, 115, 111]);
+  });
+  it('lasso.indexesOf (regExp): Returns an Array of objects', function () {
+    lasso.indexesOf('This will index the i', /i/).should.eql([{
+      index : 2, length : 1, match : 'i'
+    }, {
+      index : 6, length : 1, match : 'i'
+    }, {
+      index : 10, length : 1, match : 'i'
+    }, {
+      index : 20, length : 1, match : 'i'
+    }]);
+  });
+  it('lasso.indexesOf (string): Returns an Array of objects', function () {
+    lasso.indexesOf('This will index the i', 'i').should.eql([{
+      index : 2, length : 1, match : 'i'
+    }, {
+      index : 6, length : 1, match : 'i'
+    }, {
+      index : 10, length : 1, match : 'i'
+    }, {
+      index : 20, length : 1, match : 'i'
+    }]);
+  });
+});
