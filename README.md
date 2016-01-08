@@ -43,6 +43,12 @@ Also works with a regular expression
 rope.indexesOf('Check out where the indexes of \'e\' are', /e/);
 ```
 
+### .jsCase
+```javascript
+rope.jsCase('Let\'s JavaScript case this thing');
+// -> letsJavascriptCaseThisThing
+```
+
 ### Chain methods together
 
 ```javascript
