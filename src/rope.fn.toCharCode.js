@@ -1,5 +1,5 @@
 rope.fn.toCharCode = function (strung) {
-  strung.value = strung.value.split('').map(function (a) {
+  strung.value = Array.prototype.map.call(strung.value.split(''), function (a) {
     return a.charCodeAt(0);
   });
   return strung;
