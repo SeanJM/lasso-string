@@ -1,3 +1,4 @@
+[![Circle CI](https://circleci.com/gh/SeanJM/lasso.svg?circle-token=5c:41:84:31:63:be:5f:4e:c9:b9:bd:5b:a3:d2:55:e3)](https://circleci.com/gh/SeanJM/lasso/tree/master)
 ## Lasso
 #### An interface for editing strings
 
