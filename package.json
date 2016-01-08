@@ -1,5 +1,5 @@
 {
-  "name": "lasso",
+  "name": "lasso-string",
   "title": "Lasso",
   "description": "A function with methods to manipulate strings and get information about strings.",
   "version": "1.0.0",
