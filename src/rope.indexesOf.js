@@ -1,33 +1,25 @@
-rope.fn.indexesOf = function (strung, match) {
-  var string = strung.value;
-  var index = 0;
-  var max = string.length;
-  strung.value = [];
+function indexesOf(string, match) {
+  var index   = 0;
+  var indexes = [];
+  var max     = string.length;
+  var currentIndex;
   function isRegularExpression() {
-    var currentIndex  = string.substr(index, max - index).search(match);
-    var matchedString = string.match(match);
-    if (matchedString) {
-      matchedString = matchedString[0];
-    } else {
-      matchedString = '';
-    }
-    while (currentIndex !== -1 && index < max) {
-      strung.value.push({
+    var matched = match.exec(string.substr(0, max));
+    while (matched) {
+ 	   	currentIndex = matched.index;
+      indexes.push({
         index : index + currentIndex,
-        length : matchedString.length,
-        match : matchedString
+        length : matched[0].length,
+        match : matched[0]
       });
-      index += currentIndex + matchedString.length;
-      currentIndex  = string.substr(index, max - index).search(match);
-      if (currentIndex !== -1) {
-        matchedString = string.substr(index, max - index).match(match)[0];
-      }
+      index += currentIndex + matched[0].length;
+      matched = match.exec(string.substr(index, max - index));
     }
   }
   function isString() {
-    var currentIndex = string.substr(index, max - index).indexOf(match);
+    currentIndex = string.substr(index, max - index).indexOf(match);
     while (currentIndex !== -1 && index < max) {
-      strung.value.push({
+      indexes.push({
         index : index + currentIndex,
         length : match.length,
         match : match
@@ -41,5 +33,5 @@ rope.fn.indexesOf = function (strung, match) {
   } else if (typeof match.test === 'function') {
     isRegularExpression();
   }
-  return strung;
-};
+  return indexes;
+}
