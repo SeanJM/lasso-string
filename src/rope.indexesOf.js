@@ -1,7 +1,7 @@
 rope.fn.indexesOf = function (strung, match) {
   var string = strung.value;
-  var index   = 0;
-  var max     = string.length;
+  var index = 0;
+  var max = string.length;
   strung.value = [];
   function isRegularExpression() {
     var currentIndex  = string.substr(index, max - index).search(match);
@@ -13,9 +13,9 @@ rope.fn.indexesOf = function (strung, match) {
     }
     while (currentIndex !== -1 && index < max) {
       strung.value.push({
-        index  : index + currentIndex,
+        index : index + currentIndex,
         length : matchedString.length,
-        match  : matchedString
+        match : matchedString
       });
       index += currentIndex + matchedString.length;
       currentIndex  = string.substr(index, max - index).search(match);
@@ -28,9 +28,9 @@ rope.fn.indexesOf = function (strung, match) {
     var currentIndex = string.substr(index, max - index).indexOf(match);
     while (currentIndex !== -1 && index < max) {
       strung.value.push({
-        index  : index + currentIndex,
+        index : index + currentIndex,
         length : match.length,
-        match  : match
+        match : match
       });
       index        += currentIndex + match.length;
       currentIndex  = string.substr(index, max - index).indexOf(match);
