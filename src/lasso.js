@@ -1,18 +1,18 @@
-function rope (string) {
+function lasso (string) {
   var strung = { value : string };
-  for (var k in rope.fn) {
+  for (var k in lasso.fn) {
     strung[k] = function (k) {
       return function () {
         var a = [].slice.call(arguments);
-        return rope.fn[k].apply(null, [strung].concat(a));
+        return lasso.fn[k].apply(null, [strung].concat(a));
       };
     }(k);
   }
   return strung;
 };
 
-rope.fn = {};
+lasso.fn = {};
 
 if (typeof module === 'object') {
-  module.exports = rope;
+  module.exports = lasso;
 }

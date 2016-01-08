@@ -1,6 +1,6 @@
 {
-  "name": "rope",
-  "title": "Rope",
+  "name": "lasso",
+  "title": "Lasso",
   "description": "A function with methods to manipulate strings and get information about strings.",
   "version": "1.0.0",
   "author" : {
@@ -9,7 +9,7 @@
   },
   "repository" : {
     "type": "git",
-    "url": "git+https://github.com/SeanJM/rope.git"
+    "url": "git+https://github.com/SeanJM/lasso.git"
   },
   "license": "GNU 3",
   "keywords": [
@@ -17,7 +17,7 @@
     "string",
     "manipulation"
   ],
-  "main" : "rope.min.js",
+  "main" : "lasso.min.js",
   "bugs": {
     "url": "https://github.com/SeanJM/rope/issues"
   },

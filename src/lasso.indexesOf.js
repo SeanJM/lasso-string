@@ -1,4 +1,4 @@
-rope.fn.indexesOf = function (strung, match) {
+lasso.fn.indexesOf = function (strung, match) {
   var index   = 0;
   var indexes = [];
   var string  = strung.value;

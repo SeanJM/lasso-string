@@ -2,7 +2,7 @@ var js = {};
 (function () {
   var lib = {
     main : [
-      'src/rope.js',
+      'src/lasso.js',
       'src/!(init).js',
       'src/init.js',
     ]
@@ -30,7 +30,7 @@ module.exports = function(grunt) {
       },
       main : {
         files: {
-          'rope.min.js': js.main,
+          'lasso.min.js': js.main,
         }
       }
     },

@@ -1,51 +1,51 @@
-## Rope
+## Lasso
 #### An interface for editing strings
 
 ## Methods
 
 ### .splice
 ```javascript
-rope.splice('string', 1, 0, 'INSERT');
+lasso.splice('string', 1, 0, 'INSERT');
 // -> sINSERTtring
 ```
 
 ### .template
 ```javascript
-rope.template('Use %s to template a string', 'Rope');
+lasso.template('Use %s to template a string', 'Rope');
 // -> Use Rope to template a string
 ```
 
 You can also reference indexes:
 
 ```javascript
-rope.template('indexed %0', 'values');
+lasso.template('indexed %0', 'values');
 // -> indexed values
 ```
 
 ### .toCharCode
 ```javascript
-rope.toCharCode('s');
+lasso.toCharCode('s');
 // -> [115]
 
-rope.toCharCode('Rope');
+lasso.toCharCode('Rope');
 // -> [82, 111, 112, 101]
 ```
 
 ### .indexesOf
 ```javascript
-rope.indexesOf('Check out where the indexes of \'e\' are', 'e');
+lasso.indexesOf('Check out where the indexes of \'e\' are', 'e');
 // -> [{ index : 3, length : 1, match : 'e'}, { index : 5, length : 1, match : 'e'}, { ... }]
 ```
 
 Also works with a regular expression
 
 ```javascript
-rope.indexesOf('Check out where the indexes of \'e\' are', /e/);
+lasso.indexesOf('Check out where the indexes of \'e\' are', /e/);
 ```
 
 ### .jsCase
 ```javascript
-rope.jsCase('Let\'s JavaScript case this thing');
+lasso.jsCase('Let\'s JavaScript case this thing');
 // -> letsJavascriptCaseThisThing
 ```
 
@@ -64,7 +64,7 @@ rope('What is %0?')
 In the `strung` object you have access to all the other `rope` methods. The value you have to mutate to the be compatible to the other methods is `strung.value`
 
 ```javascript
-rope.fn.kebabCase = function (strung) {
+lasso.fn.kebabCase = function (strung) {
   strung.value = strung.value.split(/ |_|-/).join('-').split('').map(function (a) {
     if (a.toUpperCase() === a && a !== '-') {
       return '-' + a.toLowerCase();
