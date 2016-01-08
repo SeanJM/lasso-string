@@ -12,3 +12,7 @@ function rope (string) {
 };
 
 rope.fn = {};
+
+if (typeof module === 'object') {
+  module.exports = rope;
+}

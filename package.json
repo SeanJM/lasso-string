@@ -1,6 +1,27 @@
 {
   "name": "rope",
+  "title": "Rope",
+  "description": "A function with methods to manipulate strings and get information about strings.",
   "version": "1.0.0",
+  "author" : {
+    "name" : "Sean MacIsaac",
+    "email" : "seanjmacisaac@gmail.com"
+  },
+  "repository" : {
+    "type": "git",
+    "url": "git+https://github.com/SeanJM/rope.git"
+  },
+  "license": "GNU 3",
+  "keywords": [
+    "CommonJS",
+    "string",
+    "manipulation"
+  ],
+  "main" : "rope.min.js",
+  "bugs": {
+    "url": "https://github.com/SeanJM/rope/issues"
+  },
+  "homepage": "https://github.com/SeanJM/rope",
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-autoprefixer": "^1.0.0",
