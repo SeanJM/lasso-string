@@ -11,15 +11,15 @@ rope.splice('string', 1, 0, 'INSERT');
 
 ### .template
 ```javascript
-rope.template('What %s is to %s, Rope is to %s', 'lodash', 'Arrays', 'Strings');
-// -> What lodash is to Arrays, Rope is to Strings
+rope.template('Use %s to template a string', 'Rope');
+// -> Use Rope to template a string
 ```
 
 You can also reference indexes:
 
 ```javascript
-rope.template('What %0 is to %1, %2 is to %3. This is what makes %2 so powerful', 'lodash', 'Arrays', 'Rope', 'Strings');
-// -> What lodash is to Arrays, Rope is to Strings. This is what makes Rope so powerful
+rope.template('indexed %0', 'values');
+// -> indexed values
 ```
 
 ### .toCharCode
@@ -46,11 +46,11 @@ rope.indexesOf('Check out where the indexes of \'e\' are', /e/);
 ### Chain methods together
 
 ```javascript
-rope('What %0 is to %1, %2 is to %3. This is what makes %2 so powerful')
-.template('lodash', 'Arrays', 'Rope', 'Strings')
-.splice(4, 0, 'SPLICE')
+rope('What is %0?')
+.template('Rope')
+.splice(1, 0, 'SPLICE')
 .value;
-// -> WhatSPLICE lodash is to Arrays, Rope is to Strings. This is what makes Rope so powerful
+// -> WSPLICEhat is Rope?
 ```
 
 ### Adding your own methods to `rope`
