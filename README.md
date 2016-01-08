@@ -52,7 +52,7 @@ lasso.jsCase('Let\'s JavaScript case this thing');
 ### Chain methods together
 
 ```javascript
-rope('What is %0?')
+lasso('What is %0?')
 .template('Rope')
 .splice(1, 0, 'SPLICE')
 .value;
