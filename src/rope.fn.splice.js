@@ -1,4 +1,5 @@
 rope.fn.splice = function (strung, start, length, newString) {
-  strung.value = strung.value.substr(0, start) + newString + strung.value.substr(start + length, strung.value.length - start - length);
+  var s = strung.value;
+  strung.value = s.substr(0, start) + newString + s.substr(start + length, s.length - start - length);
   return strung;
 };
