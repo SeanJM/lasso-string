@@ -1,12 +1,13 @@
-function indexesOf(string, match) {
+rope.fn.indexesOf = function (strung, match) {
   var index   = 0;
   var indexes = [];
+  var string  = strung.value;
   var max     = string.length;
   var currentIndex;
   function isRegularExpression() {
     var matched = match.exec(string.substr(0, max));
     while (matched) {
- 	   	currentIndex = matched.index;
+      currentIndex = matched.index;
       indexes.push({
         index : index + currentIndex,
         length : matched[0].length,
@@ -33,5 +34,6 @@ function indexesOf(string, match) {
   } else if (typeof match.test === 'function') {
     isRegularExpression();
   }
-  return indexes;
-}
+  strung.value = indexes;
+  return strung;
+};
