@@ -75,3 +75,9 @@ lasso.fn.kebabCase = function (strung) {
   return strung;
 };
 ```
+
+### Including the module with Node JS (CommonJS)
+
+```javascript
+var lasso = require('lasso');
+```
