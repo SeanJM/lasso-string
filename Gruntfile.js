@@ -34,10 +34,16 @@ module.exports = function(grunt) {
         }
       }
     },
+    concat : {
+      dist : {
+        src : js.main,
+        dest : 'lasso.js'
+      }
+    },
     watch: {
       main : {
         files: js.main,
-        tasks: ['uglify:main'],
+        tasks: ['uglify:main', 'concat'],
         options: {}
       }
     }
@@ -46,6 +52,7 @@ module.exports = function(grunt) {
   // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-concat');
   // Default task(s).
-  grunt.registerTask('default', ['uglify', 'watch']);
+  grunt.registerTask('default', ['uglify', 'concat', 'watch']);
 };
