@@ -36,4 +36,62 @@ describe('Testing the string functions', function () {
       index : 20, length : 1, match : 'i'
     }]);
   });
+  it('lasso.between (basic): Returns an Array of objects', function () {
+    lasso.between('This) is (between)', '(', ')').should.eql([ { length: 7,
+    start: 10,
+    capture: { start: 9, length: 9, value: '(between)' },
+    value: 'between' } ]);
+  });
+  it('lasso.between (smart open): Returns an Array of objects', function () {
+    lasso.between('*** Part: $nick %if($value, ($value)) %if($value, ($value))', '%if(', ')').should.eql([ { length: 16,
+    start: 42,
+    capture: { start: 38, length: 21, value: '%if($value, ($value))' },
+    value: '$value, ($value)' },
+  { length: 16,
+    start: 20,
+    capture: { start: 16, length: 21, value: '%if($value, ($value))' },
+    value: '$value, ($value)' } ]);
+  });
+  it('lasso.between (smart open RegExp): Returns an Array of objects', function () {
+    lasso.between('*** Part: $nick %if($value, ($value)) %if($value, ($value))', /%if\(/, ')').should.eql([ { length: 16,
+    start: 42,
+    capture: { start: 38, length: 21, value: '%if($value, ($value))' },
+    value: '$value, ($value)' },
+  { length: 16,
+    start: 20,
+    capture: { start: 16, length: 21, value: '%if($value, ($value))' },
+    value: '$value, ($value)' } ]);
+  });
+  it('lasso.between (smart closed): Returns an Array of objects', function () {
+    lasso.between('*** Part: $nick ($value, ($value))%if ($value, ($value))%if', '(', ')%if').should.eql([ { length: 16,
+    start: 39,
+    capture: { start: 38, length: 21, value: '($value, ($value))%if' },
+    value: '$value, ($value)' },
+  { length: 16,
+    start: 17,
+    capture: { start: 16, length: 21, value: '($value, ($value))%if' },
+    value: '$value, ($value)' } ]);
+  });
+  it('lasso.between (smart closed RegExp): Returns an Array of objects', function () {
+    lasso.between('*** Part: $nick ($value, ($value))%if ($value, ($value))%if', '(', /\)%if/).should.eql([ { length: 16,
+    start: 39,
+    capture: { start: 38, length: 21, value: '($value, ($value))%if' },
+    value: '$value, ($value)' },
+  { length: 16,
+    start: 17,
+    capture: { start: 16, length: 21, value: '($value, ($value))%if' },
+    value: '$value, ($value)' } ]);
+  });
+  it('lasso.between (smart closed RegExp non matching open and closed): Returns an Array of objects', function () {
+    lasso.between('*** Part: $nick ($value, ($value)%if', '(', /\)%if/).should.eql([ { length: 6,
+    start: 26,
+    capture: { start: 25, length: 11, value: '($value)%if' },
+    value: '$value' } ]);
+  });
+  it('lasso.between (smart closed no matches): Returns an Array of objects', function () {
+    lasso.between('*** Part: $nick ($value, ($value%if', '(', ')%if').should.eql([]);
+  });
+  it('lasso.between (smart closed RegExp no matches): Returns an Array of objects', function () {
+    lasso.between('*** Part: $nick ($value, ($value%if', '(', /\)%if/).should.eql([]);
+  });
 });
