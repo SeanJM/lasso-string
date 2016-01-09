@@ -50,6 +50,31 @@ lasso.jsCase('Let\'s JavaScript case this thing');
 // -> letsJavascriptCaseThisThing
 ```
 
+### .between
+
+Basic usage
+
+```javascript
+lasso.between('This) is (between)', '(', ')');
+// -> [ { length: 7, start: 10, capture: { start: 9, length: 9, value: '(between)' }, value: 'between' } ]
+```
+
+Smart capturing
+
+```javascript
+lasso.between('*** Part: $nick %if($value, ($value))', '%if(', ')');
+// -> [ { length: 16, start: 42, capture: { start: 38, length: 21, value: '%if($value, ($value))' }, value: '$value, ($value)' } ]
+```
+
+Using Regular Expressions
+
+```javascript
+lasso.between('*** Part: $nick %if($value, ($value))', /%if\(/, ')');
+// -> [ { length: 16, start: 42, capture: { start: 38, length: 21, value: '%if($value, ($value))' }, value: '$value, ($value)' } ]
+```
+
+*Smart capturing will work forwards or backwards*
+
 ### Chain methods together
 
 ```javascript
