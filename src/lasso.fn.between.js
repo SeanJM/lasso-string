@@ -15,9 +15,9 @@ lasso.fn.between = function (strung, a, b) {
     var y = closed[cIndex];
     captureIndex.push({
       length : l - x.length - y.length,
-      start : x.index + x.length,
+      index : x.index + x.length,
       capture : {
-        start : x.index,
+        index : x.index,
         length : l,
         value : string.substr(x.index, l)
       },
