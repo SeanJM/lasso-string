@@ -4,6 +4,9 @@ lasso.fn.indexesOf = function (strung, match) {
   var string  = strung.value;
   var max     = string.length;
   var currentIndex;
+  if (arguments.length !== 2) {
+    throw 'Error (lasso.fn.indexesOf): Missing Arguments';
+  }
   function isRegularExpression() {
     var matched = match.exec(string.substr(0, max));
     while (matched) {
