@@ -5,6 +5,9 @@ describe('Testing the string functions', function () {
   it('lasso.jsCase: Converts invalid JavaScript names to valid names', function () {
     lasso.jsCase('Let\'s convert this').should.equal('letsConvertThis');
   });
+  it('lasso.jsCase (dashes): Converts invalid JavaScript names to valid names', function () {
+    lasso.jsCase('-js-case-this').should.equal('jsCaseThis');
+  });
   it('lasso.splice: Splices a string into another string', function () {
     lasso.splice('AB', 1, 0, '-text-').should.equal('A-text-B');
   });

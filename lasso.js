@@ -145,7 +145,7 @@ lasso.fn.indexesOf = function (strung, match) {
 
 lasso.fn.jsCase = function (strung, start, length, newString) {
   if (typeof strung.value === 'string' && strung.value.length) {
-    strung.value = strung.value.match(/[a-zA-Z0-9\. ]/g).join('').replace(/\./g, '_').split(' ').map(function (a, i) {
+    strung.value = strung.value.replace(/-/g, ' ').trim().match(/[a-zA-Z0-9\. ]/g).join('').replace(/\./g, '_').split(' ').map(function (a, i) {
       if (i === 0) {
         return a.toLowerCase();
       }
