@@ -1,15 +1,5 @@
 function lasso (string) {
-  var strung = { value : string };
-  for (var k in lasso) {
-    strung[k] = function (k) {
-      return function () {
-        var a = [].slice.call(arguments);
-        strung.value = lasso[k].apply(null, [strung.value].concat(a));
-        return strung;
-      };
-    }(k);
-  }
-  return strung;
+  return lasso.chain(string);
 };
 
 if (typeof module === 'object') {
@@ -171,3 +161,20 @@ lasso.toCharCode = function (string) {
     return a.charCodeAt(0);
   });
 };
+
+(function () {
+  var strung = {};
+  for (var k in lasso) {
+    strung[k] = function (k) {
+      return function () {
+        var a = [].slice.call(arguments);
+        strung.value = lasso[k].apply(null, [strung.value].concat(a));
+        return strung;
+      };
+    }(k);
+  }
+  lasso.chain = function (string) {
+    strung.value = string;
+    return strung;
+  };
+}());

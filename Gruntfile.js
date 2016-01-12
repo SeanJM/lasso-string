@@ -3,7 +3,8 @@ var js = {};
   var lib = {
     main : [
       'src/lasso.js',
-      'src/lasso.*.js',
+      'src/lasso.!(chain).js',
+      'src/lasso.chain.js',
     ]
   };
   function get(files) {
