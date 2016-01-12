@@ -1,27 +1,25 @@
 function lasso (string) {
   var strung = { value : string };
-  for (var k in lasso.fn) {
+  for (var k in lasso) {
     strung[k] = function (k) {
       return function () {
         var a = [].slice.call(arguments);
-        return lasso.fn[k].apply(null, [strung].concat(a));
+        strung.value = lasso[k].apply(null, [strung.value].concat(a));
+        return strung;
       };
     }(k);
   }
   return strung;
 };
 
-lasso.fn = {};
-
 if (typeof module === 'object') {
   module.exports = lasso;
 }
 
-lasso.fn.between = function (strung, a, b) {
+lasso.between = function (string, a, b) {
   var captureIndex = [];
-  var string = strung.value;
-  var open = lasso.fn.indexesOf({ value : string }, a).value;
-  var closed = lasso.fn.indexesOf({ value : string }, b).value;
+  var open = lasso.indexesOf(string, a);
+  var closed = lasso.indexesOf(string, b);
   var smartCapture = {
     closed : { ')' : '(', '}' : '{', ']' : '[' },
     open : { '(' : ')', '{' : '}', '[' : ']' }
@@ -96,18 +94,28 @@ lasso.fn.between = function (strung, a, b) {
       findMatch(0);
     }
   }
-  strung.value = captureIndex;
-  return strung;
+  return captureIndex;
 };
 
-lasso.fn.indexesOf = function (strung, match) {
+lasso.camelCase = function (string, start, length, newString) {
+  if (typeof string === 'string' && string.length) {
+    string = string.replace(/-/g, ' ').trim().match(/[a-zA-Z0-9\. ]/g).join('').replace(/\./g, '_').split(' ').map(function (a, i) {
+      if (i === 0) {
+        return a.toLowerCase();
+      }
+      return a[0].toUpperCase() + a.substr(1, a.length).toLowerCase();
+    }).join('');
+  }
+  return string;
+};
+
+lasso.indexesOf = function (string, match) {
   var index   = 0;
   var indexes = [];
-  var string  = strung.value;
   var max     = string.length;
   var currentIndex;
   if (arguments.length !== 2) {
-    throw 'Error (lasso.fn.indexesOf): Missing Arguments';
+    throw 'Error (lasso.indexesOf): Missing Arguments';
   }
   function isRegularExpression() {
     var matched = match.exec(string.substr(0, max));
@@ -139,54 +147,27 @@ lasso.fn.indexesOf = function (strung, match) {
   } else if (typeof match.test === 'function') {
     isRegularExpression();
   }
-  strung.value = indexes;
-  return strung;
+  return indexes;
 };
 
-lasso.fn.jsCase = function (strung, start, length, newString) {
-  if (typeof strung.value === 'string' && strung.value.length) {
-    strung.value = strung.value.replace(/-/g, ' ').trim().match(/[a-zA-Z0-9\. ]/g).join('').replace(/\./g, '_').split(' ').map(function (a, i) {
-      if (i === 0) {
-        return a.toLowerCase();
-      }
-      return a[0].toUpperCase() + a.substr(1, a.length).toLowerCase();
-    }).join('');
-  }
-  return strung;
+lasso.splice = function (string, start, length, newString) {
+  return string.substr(0, start) + newString + string.substr(start + length, string.length - start - length);
 };
 
-lasso.fn.splice = function (strung, start, length, newString) {
-  var s = strung.value;
-  strung.value = s.substr(0, start) + newString + s.substr(start + length, s.length - start - length);
-  return strung;
-};
-
-lasso.fn.template = function (strung) {
+lasso.template = function (string) {
   var s = [].slice.call(arguments, 1, arguments.length);
   var i = 0;
-  strung.value = strung.value.replace(/(?:%s|%([0-9]+))/g, function (a, b) {
+  return string.replace(/(?:%s|%([0-9]+))/g, function (a, b) {
     if (b) {
       return s[Number(b)];
     }
     i += 1;
     return s[i - 1];
   });
-  return strung;
 };
 
-lasso.fn.toCharCode = function (strung) {
-  strung.value = Array.prototype.map.call(strung.value.split(''), function (a) {
+lasso.toCharCode = function (string) {
+  return Array.prototype.map.call(string.split(''), function (a) {
     return a.charCodeAt(0);
   });
-  return strung;
 };
-
-for (var k in lasso.fn) {
-  lasso[k] = function (k) {
-    return function (string) {
-    	var strung = { value : string };
-      var a = [].slice.call(arguments, 1);
-      return lasso.fn[k].apply(null, [strung].concat(a)).value;
-    }
-  }(k);
-}

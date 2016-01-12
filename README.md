@@ -44,9 +44,9 @@ Also works with a regular expression
 lasso.indexesOf('Check out where the indexes of \'e\' are', /e/);
 ```
 
-### .jsCase
+### .camelCase
 ```javascript
-lasso.jsCase('Let\'s JavaScript case this thing');
+lasso.camelCase('Let\'s JavaScript case this thing');
 // -> letsJavascriptCaseThisThing
 ```
 
@@ -90,14 +90,13 @@ lasso('What is %0?')
 In the `strung` object you have access to all the other `rope` methods. The value you have to mutate to the be compatible to the other methods is `strung.value`
 
 ```javascript
-lasso.fn.kebabCase = function (strung) {
-  strung.value = strung.value.split(/ |_|-/).join('-').split('').map(function (a) {
+lasso.kebabCase = function (strung) {
+  return strung.value.split(/ |_|-/).join('-').split('').map(function (a) {
     if (a.toUpperCase() === a && a !== '-') {
       return '-' + a.toLowerCase();
     }
     return a;
   }).join('').toLowerCase();
-  return strung;
 };
 ```
 

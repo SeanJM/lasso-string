@@ -2,11 +2,11 @@ var should = require('chai').should();
 var lasso = require('./lasso.min.js');
 
 describe('Testing the string functions', function () {
-  it('lasso.jsCase: Converts invalid JavaScript names to valid names', function () {
-    lasso.jsCase('Let\'s convert this').should.equal('letsConvertThis');
+  it('lasso.camelCase: Converts invalid JavaScript names to valid names', function () {
+    lasso.camelCase('Let\'s convert this').should.equal('letsConvertThis');
   });
-  it('lasso.jsCase (dashes): Converts invalid JavaScript names to valid names', function () {
-    lasso.jsCase('-js-case-this').should.equal('jsCaseThis');
+  it('lasso.camelCase (dashes): Converts invalid JavaScript names to valid names', function () {
+    lasso.camelCase('camel-case-this').should.equal('camelCaseThis');
   });
   it('lasso.splice: Splices a string into another string', function () {
     lasso.splice('AB', 1, 0, '-text-').should.equal('A-text-B');
@@ -96,5 +96,8 @@ describe('Testing the string functions', function () {
   });
   it('lasso.between (smart closed RegExp no matches): Returns an Array of objects', function () {
     lasso.between('*** Part: $nick ($value, ($value%if', '(', /\)%if/).should.eql([]);
+  });
+  it('lasso chain: Chain lasso functions together', function () {
+    lasso('this string').camelCase().toCharCode().value.should.eql([116, 104, 105, 115, 83, 116, 114, 105, 110, 103]);
   });
 });

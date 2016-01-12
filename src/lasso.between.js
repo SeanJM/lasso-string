@@ -1,8 +1,7 @@
-lasso.fn.between = function (strung, a, b) {
+lasso.between = function (string, a, b) {
   var captureIndex = [];
-  var string = strung.value;
-  var open = lasso.fn.indexesOf({ value : string }, a).value;
-  var closed = lasso.fn.indexesOf({ value : string }, b).value;
+  var open = lasso.indexesOf(string, a);
+  var closed = lasso.indexesOf(string, b);
   var smartCapture = {
     closed : { ')' : '(', '}' : '{', ']' : '[' },
     open : { '(' : ')', '{' : '}', '[' : ']' }
@@ -77,6 +76,5 @@ lasso.fn.between = function (strung, a, b) {
       findMatch(0);
     }
   }
-  strung.value = captureIndex;
-  return strung;
+  return captureIndex;
 };

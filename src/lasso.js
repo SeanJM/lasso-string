@@ -1,17 +1,16 @@
 function lasso (string) {
   var strung = { value : string };
-  for (var k in lasso.fn) {
+  for (var k in lasso) {
     strung[k] = function (k) {
       return function () {
         var a = [].slice.call(arguments);
-        return lasso.fn[k].apply(null, [strung].concat(a));
+        strung.value = lasso[k].apply(null, [strung.value].concat(a));
+        return strung;
       };
     }(k);
   }
   return strung;
 };
-
-lasso.fn = {};
 
 if (typeof module === 'object') {
   module.exports = lasso;

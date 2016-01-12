@@ -1,11 +1,10 @@
-lasso.fn.indexesOf = function (strung, match) {
+lasso.indexesOf = function (string, match) {
   var index   = 0;
   var indexes = [];
-  var string  = strung.value;
   var max     = string.length;
   var currentIndex;
   if (arguments.length !== 2) {
-    throw 'Error (lasso.fn.indexesOf): Missing Arguments';
+    throw 'Error (lasso.indexesOf): Missing Arguments';
   }
   function isRegularExpression() {
     var matched = match.exec(string.substr(0, max));
@@ -37,6 +36,5 @@ lasso.fn.indexesOf = function (strung, match) {
   } else if (typeof match.test === 'function') {
     isRegularExpression();
   }
-  strung.value = indexes;
-  return strung;
+  return indexes;
 };

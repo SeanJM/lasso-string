@@ -3,8 +3,7 @@ var js = {};
   var lib = {
     main : [
       'src/lasso.js',
-      'src/!(init).js',
-      'src/init.js',
+      'src/lasso.*.js',
     ]
   };
   function get(files) {
