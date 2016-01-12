@@ -90,8 +90,8 @@ lasso('What is %0?')
 In the `strung` object you have access to all the other `rope` methods. The value you have to mutate to the be compatible to the other methods is `strung.value`
 
 ```javascript
-lasso.kebabCase = function (strung) {
-  return strung.value.split(/ |_|-/).join('-').split('').map(function (a) {
+lasso.kebabCase = function (string) {
+  return string.split(/ |_|-/).join('-').split('').map(function (a) {
     if (a.toUpperCase() === a && a !== '-') {
       return '-' + a.toLowerCase();
     }
