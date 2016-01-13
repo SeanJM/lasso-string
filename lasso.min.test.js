@@ -8,6 +8,9 @@ describe('Testing the string functions', function () {
   it('lasso.camelCase (dashes): Converts invalid JavaScript names to valid names', function () {
     lasso.camelCase('camel-case-this').should.equal('camelCaseThis');
   });
+  it('lasso.camelCase (double dashes): Converts invalid JavaScript names to valid names', function () {
+    lasso.camelCase('-js-qiktracker-button--close').should.equal('jsQiktrackerButtonClose');
+  });
   it('lasso.splice: Splices a string into another string', function () {
     lasso.splice('AB', 1, 0, '-text-').should.equal('A-text-B');
   });
