@@ -73,6 +73,13 @@ lasso.between('*** Part: $nick %if($value, ($value))', /%if\(/, ')');
 // -> [ { length: 16, index: 42, capture: { index: 38, length: 21, value: '%if($value, ($value))' }, value: '$value, ($value)' } ]
 ```
 
+### .group
+
+```javascript
+lasso.group(1000.49);
+// -> 1,000.49
+```
+
 *Smart capturing will work forwards or backwards*
 
 ### Chain methods together
