@@ -102,9 +102,11 @@ lasso.camelCase = function (string, start, length, newString) {
 lasso.group = function (string, start, length, newString) {
   var s = string.toString().split('.');
   var n = s[0].split('').reverse();
-  for (var i = n.length; i >= 0; i--) {
-    if (i > 0 && i % 3 === 0) {
-      n.splice(i, 0, ',');
+  if (n.length > 3) {
+    for (var i = n.length; i >= 0; i--) {
+      if (i > 0 && i % 3 === 0) {
+        n.splice(i, 0, ',');
+      }
     }
   }
   if (s.length === 2) {
@@ -174,6 +176,10 @@ lasso.toCharCode = function (string) {
   return Array.prototype.map.call(string.split(''), function (a) {
     return a.charCodeAt(0);
   });
+};
+
+lasso.toCurrency = function (prefix, value) {
+  return prefix + lasso.group(value.toFixed(2));
 };
 
 (function () {

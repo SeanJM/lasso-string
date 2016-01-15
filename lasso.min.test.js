@@ -103,6 +103,9 @@ describe('Testing the string functions', function () {
   it('lasso chain: Chain lasso functions together', function () {
     lasso('this string').camelCase().toCharCode().value.should.eql([116, 104, 105, 115, 83, 116, 114, 105, 110, 103]);
   });
+  it('lasso group: Group numbers small number', function () {
+    lasso.group(100).should.equal('100');
+  });
   it('lasso group: Group numbers', function () {
     lasso.group(1000).should.equal('1,000');
   });
