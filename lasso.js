@@ -179,7 +179,14 @@ lasso.toCharCode = function (string) {
 };
 
 lasso.toCurrency = function (prefix, value) {
-  return prefix + lasso.group(value.toFixed(2));
+  if (arguments.length === 1) {
+    value = prefix;
+    prefix = '$';
+  }
+  if (value < 0 || value.toString().startsWith('-')) {
+    return '-' + prefix + lasso.group((Number(value) * -1).toFixed(2));
+  }
+  return prefix + lasso.group(Number(value).toFixed(2));
 };
 
 (function () {

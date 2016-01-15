@@ -115,4 +115,22 @@ describe('Testing the string functions', function () {
   it('lasso group: Group larger numbers with decimal', function () {
     lasso.group(1234567.598).should.equal('1,234,567.598');
   });
+  it('lasso toCurrency: An argument without a prefix', function () {
+    lasso.toCurrency(59.99).should.equal('$59.99');
+  });
+  it('lasso toCurrency: An argument without a prefix that is negative', function () {
+    lasso.toCurrency(-59.99).should.equal('-$59.99');
+  });
+  it('lasso toCurrency: An argument with a prefix', function () {
+    lasso.toCurrency('$', 59.99).should.equal('$59.99');
+  });
+  it('lasso toCurrency: An argument with a prefix that is negative', function () {
+    lasso.toCurrency('$', -59.99).should.equal('-$59.99');
+  });
+  it('lasso toCurrency: An argument with a prefix and a number as a string', function () {
+    lasso.toCurrency('$', '59.99').should.equal('$59.99');
+  });
+  it('lasso toCurrency: An argument with a prefix and a number as a string that is negative', function () {
+    lasso.toCurrency('$', '-59.99').should.equal('-$59.99');
+  });
 });

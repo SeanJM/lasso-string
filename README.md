@@ -80,6 +80,20 @@ lasso.group(1000.49);
 // -> 1,000.49
 ```
 
+### .toCurrency
+
+```javascript
+lasso.toCurrency(1000.49);
+// -> $1,000.49
+```
+
+You can use a custom prefix, by including as the first argument
+
+```javascript
+lasso.toCurrency('¢', 1000.49);
+// -> ¢1,000.49
+```
+
 *Smart capturing will work forwards or backwards*
 
 ### Chain methods together
