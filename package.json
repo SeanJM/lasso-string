@@ -2,7 +2,7 @@
   "name": "lasso-string",
   "title": "Lasso",
   "description": "A function with methods to manipulate strings and get information about strings.",
-  "version": "1.2.8",
+  "version": "1.3.8",
   "author": {
     "name": "Sean MacIsaac",
     "email": "seanjmacisaac@gmail.com"
