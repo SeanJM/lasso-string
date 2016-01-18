@@ -99,12 +99,46 @@ lasso.camelCase = function (string, start, length, newString) {
   return string;
 };
 
+lasso.differentWords = function (a, b) {
+	var aLoose = a.toLowerCase().match(/[a-zA-Z0-9 ]+/g).join(' ').replace(/[ ]+/g, ' ');
+  var bLoose = b.toLowerCase().match(/[a-zA-Z0-9 ]+/g).join(' ').replace(/[ ]+/g, ' ');
+  var aLooseSplit = aLoose.split(' ');
+  var bLooseSplit = bLoose.split(' ');
+  var differentWords = [];
+  var i = aLooseSplit.length - 1;
+  var index;
+  while (i >= 0) {
+  	index = bLooseSplit.indexOf(aLooseSplit[i]);
+		if (index === -1) {
+			differentWords.push(aLooseSplit[i]);
+		}
+    while (index > -1) {
+      bLooseSplit.splice(index, 1);
+    	index = bLooseSplit.indexOf(aLooseSplit[i]);
+    }
+    i -= 1;
+  }
+	i = bLooseSplit.length - 1;
+	while (i >= 0) {
+		index = aLooseSplit.indexOf(bLooseSplit[i]);
+		if (index === -1 && differentWords.indexOf(bLooseSplit[i]) === -1) {
+			differentWords.push(bLooseSplit[i]);
+		}
+    while (index > -1) {
+      aLooseSplit.splice(index, 1);
+    	index = aLooseSplit.indexOf(bLooseSplit[i]);
+    }
+    i -= 1;
+	}
+	return differentWords;
+};
+
 lasso.group = function (string, start, length, newString) {
   var s = string.toString().split('.');
   var n = s[0].split('').reverse();
   if (n.length > 3) {
     for (var i = n.length; i >= 0; i--) {
-      if (i > 0 && i % 3 === 0) {
+      if (i < n.length && i > 0 && i % 3 === 0) {
         n.splice(i, 0, ',');
       }
     }
@@ -154,6 +188,38 @@ lasso.indexesOf = function (string, match) {
     isRegularExpression();
   }
   return indexes;
+};
+
+lasso.sameWords = function (a, b) {
+	var aLoose = a.toLowerCase().match(/[a-zA-Z0-9 ]+/g).join(' ').replace(/[ ]+/g, ' ');
+  var bLoose = b.toLowerCase().match(/[a-zA-Z0-9 ]+/g).join(' ').replace(/[ ]+/g, ' ');
+  var aLooseSplit = aLoose.split(' ');
+  var bLooseSplit = bLoose.split(' ');
+  var sameWords = [];
+  var i = aLooseSplit.length - 1;
+  var index;
+  while (i >= 0) {
+  	index = bLooseSplit.indexOf(aLooseSplit[i]);
+    while (index > -1) {
+    	sameWords.push(aLooseSplit[i]);
+      bLooseSplit.splice(index, 1);
+    	index = bLooseSplit.indexOf(aLooseSplit[i]);
+    }
+    i -= 1;
+  }
+	i = bLooseSplit.length - 1;
+	while (i >= 0) {
+		index = aLooseSplit.indexOf(bLooseSplit[i]);
+    while (index > -1) {
+			if (sameWords.indexOf(bLooseSplit[i]) === -1) {
+				sameWords.push(bLooseSplit[i]);
+			}
+      aLooseSplit.splice(index, 1);
+    	index = aLooseSplit.indexOf(bLooseSplit[i]);
+    }
+    i -= 1;
+	}
+	return sameWords;
 };
 
 lasso.splice = function (string, start, length, newString) {

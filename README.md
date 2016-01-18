@@ -96,6 +96,19 @@ lasso.toCurrency('¢', 1000.49);
 
 *Smart capturing will work forwards or backwards*
 
+### Same words
+
+```javascript
+lasso.sameWords('a b c', 'a');
+// -> ['a']
+```
+### Different words
+
+```javascript
+lasso.differentWords('a b c d', 'a d f b');
+// -> ['c', 'f']
+```
+
 ### Chain methods together
 
 ```javascript

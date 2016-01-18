@@ -113,6 +113,9 @@ describe('Testing the string functions', function () {
     lasso.group(1234567).should.equal('1,234,567');
   });
   it('lasso group: Group larger numbers with decimal', function () {
+    lasso.group(234567.598).should.equal('234,567.598');
+  });
+  it('lasso group: Group larger numbers with decimal', function () {
     lasso.group(1234567.598).should.equal('1,234,567.598');
   });
   it('lasso toCurrency: An argument without a prefix', function () {
@@ -132,5 +135,11 @@ describe('Testing the string functions', function () {
   });
   it('lasso toCurrency: An argument with a prefix and a number as a string that is negative', function () {
     lasso.toCurrency('$', '-59.99').should.equal('-$59.99');
+  });
+  it('lasso same words: Find the same words in a string', function () {
+    lasso.sameWords('a b c', 'a').should.eql(['a']);
+  });
+  it('lasso same words: Find the same words in a string', function () {
+    lasso.differentWords('a b c d', 'a d f b').should.eql(['c', 'f']);
   });
 });
