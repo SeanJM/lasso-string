@@ -96,17 +96,28 @@ lasso.toCurrency('¢', 1000.49);
 
 *Smart capturing will work forwards or backwards*
 
-### Same words
+### .sameWords
 
 ```javascript
 lasso.sameWords('a b c', 'a');
 // -> ['a']
 ```
-### Different words
+### .differentWords
 
 ```javascript
 lasso.differentWords('a b c d', 'a d f b');
 // -> ['c', 'f']
+```
+
+### .distance
+
+Calculates the Levenshtein distance between two words.
+
+Based on this [implementation](https://gist.github.com/andrei-m/982927) by Andrei Mackenzie
+
+```javascript
+lasso.distance('This distance', 'That distant');
+// -> 4
 ```
 
 ### Chain methods together

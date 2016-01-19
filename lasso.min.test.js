@@ -142,4 +142,7 @@ describe('Testing the string functions', function () {
   it('lasso same words: Find the same words in a string', function () {
     lasso.differentWords('a b c d', 'a d f b').should.eql(['c', 'f']);
   });
+  it('lasso distance: Find the distance between two strings', function () {
+    lasso.distance('This distance', 'That distant').should.equal(4);
+  });
 });
