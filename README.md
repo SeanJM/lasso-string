@@ -32,6 +32,15 @@ lasso.toCharCode('Rope');
 // -> [82, 111, 112, 101]
 ```
 
+### .toChar
+```javascript
+lasso.toCharCode(82);
+// -> R
+
+lasso.toCharCode([82, 111, 112, 101]);
+// -> Rope
+```
+
 ### .indexesOf
 ```javascript
 lasso.indexesOf('Check out where the indexes of \'e\' are', 'e');
