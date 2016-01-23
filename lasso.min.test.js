@@ -137,12 +137,18 @@ describe('Testing the string functions', function () {
     lasso.toCurrency('$', '-59.99').should.equal('-$59.99');
   });
   it('lasso same words: Find the same words in a string', function () {
-    lasso.sameWords('a b c', 'a').should.eql(['a']);
+    lasso.sameWords('a a b c', 'a a').should.eql(['a']);
   });
   it('lasso same words: Find the same words in a string', function () {
     lasso.differentWords('a b c d', 'a d f b').should.eql(['c', 'f']);
   });
   it('lasso distance: Find the distance between two strings', function () {
     lasso.distance('This distance', 'That distant').should.equal(4);
+  });
+  it('lasso toChar: Convert an integer value to a Character', function () {
+    lasso.toChar(76).should.equal('L');
+  });
+  it('lasso toChar: Convert an integer value to a Character (chained)', function () {
+    lasso('Love').toCharCode().toChar().value.should.equal('Love');
   });
 });

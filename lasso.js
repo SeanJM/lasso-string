@@ -100,37 +100,37 @@ lasso.camelCase = function (string, start, length, newString) {
 };
 
 lasso.differentWords = function (a, b) {
-	var aLoose = a.toLowerCase().match(/[a-zA-Z0-9 ]+/g).join(' ').replace(/[ ]+/g, ' ');
-  var bLoose = b.toLowerCase().match(/[a-zA-Z0-9 ]+/g).join(' ').replace(/[ ]+/g, ' ');
-  var aLooseSplit = aLoose.split(' ');
-  var bLooseSplit = bLoose.split(' ');
-  var differentWords = [];
-  var i = aLooseSplit.length - 1;
-  var index;
-  while (i >= 0) {
-  	index = bLooseSplit.indexOf(aLooseSplit[i]);
+	var z = [];
+	var index;
+	var x;
+	var y;
+	var i;
+	var n;
+	var j;
+	var m;
+	a = a.match(/[a-zA-Z0-9 ]+/g).join(' ').replace(/[ ]+/g, ' ').split(' ');
+	b = b.match(/[a-zA-Z0-9 ]+/g).join(' ').replace(/[ ]+/g, ' ').split(' ');
+	for (i = 0, n = a.length; i < n; i++) {
+		index = b.indexOf(a[i]);
 		if (index === -1) {
-			differentWords.push(aLooseSplit[i]);
+			z.push(a[i]);
 		}
-    while (index > -1) {
-      bLooseSplit.splice(index, 1);
-    	index = bLooseSplit.indexOf(aLooseSplit[i]);
-    }
-    i -= 1;
-  }
-	i = bLooseSplit.length - 1;
-	while (i >= 0) {
-		index = aLooseSplit.indexOf(bLooseSplit[i]);
-		if (index === -1 && differentWords.indexOf(bLooseSplit[i]) === -1) {
-			differentWords.push(bLooseSplit[i]);
+		while (index > -1) {
+			b.splice(index, 1);
+			index = b.indexOf(a[i]);
 		}
-    while (index > -1) {
-      aLooseSplit.splice(index, 1);
-    	index = aLooseSplit.indexOf(bLooseSplit[i]);
-    }
-    i -= 1;
 	}
-	return differentWords;
+	for (i = 0, n = b.length; i < n; i++) {
+		index = a.indexOf(b[i]);
+		if (index === -1 && z.indexOf(b[i]) === -1) {
+			z.push(b[i]);
+		}
+		while (index > -1) {
+			a.splice(index, 1);
+			index = a.indexOf(b[i]);
+		}
+	}
+	return z;
 };
 
 /*
@@ -231,35 +231,33 @@ lasso.indexesOf = function (string, match) {
 };
 
 lasso.sameWords = function (a, b) {
-	var aLoose = a.toLowerCase().match(/[a-zA-Z0-9 ]+/g).join(' ').replace(/[ ]+/g, ' ');
-  var bLoose = b.toLowerCase().match(/[a-zA-Z0-9 ]+/g).join(' ').replace(/[ ]+/g, ' ');
-  var aLooseSplit = aLoose.split(' ');
-  var bLooseSplit = bLoose.split(' ');
-  var sameWords = [];
-  var i = aLooseSplit.length - 1;
-  var index;
-  while (i >= 0) {
-  	index = bLooseSplit.indexOf(aLooseSplit[i]);
-    while (index > -1) {
-    	sameWords.push(aLooseSplit[i]);
-      bLooseSplit.splice(index, 1);
-    	index = bLooseSplit.indexOf(aLooseSplit[i]);
-    }
-    i -= 1;
-  }
-	i = bLooseSplit.length - 1;
-	while (i >= 0) {
-		index = aLooseSplit.indexOf(bLooseSplit[i]);
-    while (index > -1) {
-			if (sameWords.indexOf(bLooseSplit[i]) === -1) {
-				sameWords.push(bLooseSplit[i]);
-			}
-      aLooseSplit.splice(index, 1);
-    	index = aLooseSplit.indexOf(bLooseSplit[i]);
-    }
-    i -= 1;
+  var same = [];
+	var index;
+	var x;
+	var y;
+	var i;
+	var n;
+	var j;
+	var m;
+	a = a.match(/[a-zA-Z0-9 ]+/g).join(' ').replace(/[ ]+/g, ' ').split(' ');
+	b = b.match(/[a-zA-Z0-9 ]+/g).join(' ').replace(/[ ]+/g, ' ').split(' ');
+	x = a;
+	y = b;
+	if (a.length < b.length) {
+		x = b;
+		y = a;
 	}
-	return sameWords;
+	for (i = 0, n = x.length; i < n; i++) {
+		index = y.indexOf(x[i]);
+		if (index > -1) {
+			same.push(x[i]);
+		}
+		while (index > -1) {
+			y.splice(index, 1);
+			index = y.indexOf(x[i]);
+		}
+	}
+	return same;
 };
 
 lasso.splice = function (string, start, length, newString) {
@@ -276,6 +274,15 @@ lasso.template = function (string) {
     i += 1;
     return s[i - 1];
   });
+};
+
+lasso.toChar = function (code) {
+  if (Array.isArray(code)) {
+    return code.map(function (a) {
+      return String.fromCharCode(a);
+    }).join('');
+  }
+  return String.fromCharCode(code);
 };
 
 lasso.toCharCode = function (string) {
