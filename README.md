@@ -131,12 +131,26 @@ lasso.distance('This distance', 'That distant');
 
 ### .fuzzy
 
-Returns an object of character positions in a fuzzy search, it also has a property called `distance` which returns the distance between the first matching character `index` and the last matching character `index`.
+Returns an object of character positions in a fuzzy search.
 
 ```javascript
   var match = lasso.fuzzy('this is being searched', 'tbs');
   // -> [{"index":0,"length":1,"match":"t"},{"index":8,"length":1,"match":"b"},{"index":14,"length":1,"match":"s"}]
+```
+
+#### Fuzzy search properties
+
+- `.distance` is the distance between the first and last match
+- `.closest` is the `index` of the closest match
+- `.farthest` is the `index` of the farthest match
+- `.difference` is the difference between the `closest` and `farthest` match
+
+```javascript
+  var match = lasso.fuzzy('this is being searched', 'tbs');
   // match.distance -> 14
+  // match.closest -> 6
+  // match.farthest -> 7
+  // match.difference -> 1
 ```
 
 ### Chain methods together

@@ -169,5 +169,8 @@ describe('Testing the string functions', function () {
       match:"s"
     });
     t.distance.should.eql(14);
+    t.closest.should.eql(6);
+    t.farthest.should.eql(7);
+    t.difference.should.eql(1);
   });
 });
