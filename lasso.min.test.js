@@ -151,4 +151,23 @@ describe('Testing the string functions', function () {
   it('lasso toChar: Convert an integer value to a Character (chained)', function () {
     lasso('Love').toCharCode().toChar().value.should.equal('Love');
   });
+  it('lasso fuzzy: perform a fuzzy search on a string', function () {
+    var t = lasso('this is being searched').fuzzy('tbs').value;
+    t[0].should.eql({
+      index:0,
+      length:1,
+      match:"t"
+    });
+    t[1].should.eql({
+      index:8,
+      length:1,
+      match:"b"
+    });
+    t[2].should.eql({
+      index:14,
+      length:1,
+      match:"s"
+    });
+    t.distance.should.eql(14);
+  });
 });
