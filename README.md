@@ -103,8 +103,6 @@ lasso.toCurrency('¢', 1000.49);
 // -> ¢1,000.49
 ```
 
-*Smart capturing will work forwards or backwards*
-
 ### .sameWords
 
 ```javascript
