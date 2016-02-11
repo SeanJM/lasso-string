@@ -173,4 +173,10 @@ describe('Testing the string functions', function () {
     t.farthest.should.eql(7);
     t.difference.should.eql(1);
   });
+  it('lasso trimStart: Trim whitespace character from the start of a string', function () {
+    lasso.trimStart('\t\n   Love').should.equal('Love');
+  });
+  it('lasso trimEnd: Trim whitespace character from the end of a string', function () {
+    lasso.trimEnd('Love   \t\n').should.equal('Love');
+  });
 });

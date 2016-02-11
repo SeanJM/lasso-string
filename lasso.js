@@ -346,6 +346,26 @@ lasso.toCurrency = function (prefix, value) {
   return prefix + lasso.group(Number(value).toFixed(2));
 };
 
+lasso.trimEnd = function (string) {
+  var n = string.length - 1;
+  var s = string.substr(n, 1);
+  while (s === ' ' || s === '\n' || s === '\t' || s === '\r') {
+    n -= 1;
+    s = string.substr(n, 1);
+  }
+  return string.substr(0, n + 1);
+};
+
+lasso.trimStart = function (string) {
+  var i = 0;
+  var s = string.substr(i, 1);
+  while (s === ' ' || s === '\n' || s === '\t' || s === '\r') {
+    i += 1;
+    s = string.substr(i, 1);
+  }
+  return string.slice(i);
+};
+
 (function () {
   var strung = {};
   for (var k in lasso) {

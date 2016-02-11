@@ -151,6 +151,20 @@ Returns an object of character positions in a fuzzy search.
   // match.difference -> 1
 ```
 
+#### Trim Start
+
+```javascript
+  var match = lasso.trimStart('   Love');
+  // -> Love
+```
+
+#### Trim End
+
+```javascript
+  var match = lasso.trimEnd('Love   ');
+  // -> Love
+```
+
 ### Chain methods together
 
 ```javascript
