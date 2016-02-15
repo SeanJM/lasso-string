@@ -165,6 +165,15 @@ Returns an object of character positions in a fuzzy search.
   // -> Love
 ```
 
+#### Match Type
+
+Works a bit like a regular expression match in that in returns the string split up by character group types, alpha with alpha, numbers with numbers, punctuation with punctuation, etc.
+
+```javascript
+  var match = lasso.matchType('test10.scss');
+  // -> ['test', '10', '.', 'scss'];
+```
+
 ### Chain methods together
 
 ```javascript
