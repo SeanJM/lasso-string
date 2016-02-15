@@ -32,5 +32,10 @@ lasso.matchType = function (string) {
     match[matchIndex] += string[i];
     type = typeIndex(string[i]);
   }
+  for (var i = 0, n = match.length; i < n; i++) {
+    if (!isNaN(Number(match[i]))) {
+      match[i] = Number(match[i]);
+    }
+  }
   return match;
 };

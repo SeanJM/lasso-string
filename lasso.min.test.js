@@ -180,6 +180,6 @@ describe('Testing the string functions', function () {
     lasso.trimEnd('Love   \t\n').should.equal('Love');
   });
   it('lasso matchType: return an array of characters grouped by type', function () {
-    lasso.matchType('test10.scss').should.eql(['test', '10', '.', 'scss']);
+    lasso.matchType('test10.scss').should.eql(['test', 10, '.', 'scss']);
   });
 });
