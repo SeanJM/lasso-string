@@ -65,21 +65,7 @@ Basic usage
 
 ```javascript
 lasso.between('This) is (between)', '(', ')');
-// -> [ { length: 7, index: 10, capture: { index: 9, length: 9, value: '(between)' }, value: 'between' } ]
-```
-
-Smart capturing
-
-```javascript
-lasso.between('*** Part: $nick %if($value, ($value))', '%if(', ')');
-// -> [ { length: 16, index: 42, capture: { index: 38, length: 21, value: '%if($value, ($value))' }, value: '$value, ($value)' } ]
-```
-
-Using Regular Expressions
-
-```javascript
-lasso.between('*** Part: $nick %if($value, ($value))', /%if\(/, ')');
-// -> [ { length: 16, index: 42, capture: { index: 38, length: 21, value: '%if($value, ($value))' }, value: '$value, ($value)' } ]
+// -> { length: 7, index: 10, capture: { index: 9, length: 9, value: '(between)' }, value: 'between' }
 ```
 
 ### .group

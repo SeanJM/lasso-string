@@ -42,63 +42,17 @@ describe('Testing the string functions', function () {
       index : 20, length : 1, match : 'i'
     }]);
   });
-  it('lasso.between (basic): Returns an Array of objects', function () {
-    lasso.between('This) is (between)', '(', ')').should.eql([ { length: 7,
-    index: 10,
-    capture: { index: 9, length: 9, value: '(between)' },
-    value: 'between' } ]);
-  });
-  it('lasso.between (smart open): Returns an Array of objects', function () {
-    lasso.between('*** Part: $nick %if($value, ($value)) %if($value, ($value))', '%if(', ')').should.eql([ { length: 16,
-    index: 42,
-    capture: { index: 38, length: 21, value: '%if($value, ($value))' },
-    value: '$value, ($value)' },
-  { length: 16,
-    index: 20,
-    capture: { index: 16, length: 21, value: '%if($value, ($value))' },
-    value: '$value, ($value)' } ]);
-  });
-  it('lasso.between (smart open RegExp): Returns an Array of objects', function () {
-    lasso.between('*** Part: $nick %if($value, ($value)) %if($value, ($value))', /%if\(/, ')').should.eql([ { length: 16,
-    index: 42,
-    capture: { index: 38, length: 21, value: '%if($value, ($value))' },
-    value: '$value, ($value)' },
-  { length: 16,
-    index: 20,
-    capture: { index: 16, length: 21, value: '%if($value, ($value))' },
-    value: '$value, ($value)' } ]);
-  });
-  it('lasso.between (smart closed): Returns an Array of objects', function () {
-    lasso.between('*** Part: $nick ($value, ($value))%if ($value, ($value))%if', '(', ')%if').should.eql([ { length: 16,
-    index: 39,
-    capture: { index: 38, length: 21, value: '($value, ($value))%if' },
-    value: '$value, ($value)' },
-  { length: 16,
-    index: 17,
-    capture: { index: 16, length: 21, value: '($value, ($value))%if' },
-    value: '$value, ($value)' } ]);
-  });
-  it('lasso.between (smart closed RegExp): Returns an Array of objects', function () {
-    lasso.between('*** Part: $nick ($value, ($value))%if ($value, ($value))%if', '(', /\)%if/).should.eql([ { length: 16,
-    index: 39,
-    capture: { index: 38, length: 21, value: '($value, ($value))%if' },
-    value: '$value, ($value)' },
-  { length: 16,
-    index: 17,
-    capture: { index: 16, length: 21, value: '($value, ($value))%if' },
-    value: '$value, ($value)' } ]);
-  });
-  it('lasso.between (smart closed RegExp non matching open and closed): Returns an Array of objects', function () {
-    lasso.between('*** Part: $nick ($value, ($value)%if', '(', /\)%if/).should.eql([ { length: 6,
-    index: 26,
-    capture: { index: 25, length: 11, value: '($value)%if' },
-    value: '$value' } ]);
-  });
-  it('lasso.between (smart closed no matches): Returns an Array of objects', function () {
-    lasso.between('*** Part: $nick ($value, ($value%if', '(', ')%if').should.eql([]);
-  });
-  it('lasso.between (smart closed RegExp no matches): Returns an Array of objects', function () {
-    lasso.between('*** Part: $nick ($value, ($value%if', '(', /\)%if/).should.eql([]);
+  it('lasso.between: Returns a string between 2 characters', function () {
+    lasso.between('This) is (between)', '(', ')').should.eql({
+      length: 7,
+      index: 10,
+      value: 'between',
+      capture : {
+        index : 9,
+        length : 9,
+        value : '(between)'
+      }
+    });
   });
   it('lasso chain: Chain lasso functions together', function () {
     lasso('this string').camelCase().toCharCode().value.should.eql([116, 104, 105, 115, 83, 116, 114, 105, 110, 103]);
