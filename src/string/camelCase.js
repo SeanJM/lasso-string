@@ -1,5 +1,5 @@
 function camelCase (string) {
-  return string.replace(/[-\._]+|\s+/g, ' ').trim()
+  return string.length ? string.replace(/[-\._]+|\s+/g, ' ').trim()
 
   .replace(/[A-Z][a-z0-9]+/g, function (a, i) {
   	return i > 0 ? ' ' + a : a;
@@ -11,5 +11,5 @@ function camelCase (string) {
     return i === 0 ? a.toLowerCase() : capitalize(a);
   })
 
-  .join('');
+  .join('') : string;
 }
