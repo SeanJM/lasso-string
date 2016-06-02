@@ -14,21 +14,21 @@ function sameWords (a, b) {
   y = b;
 
   if (a.length < b.length) {
-  	x = b;
-  	y = a;
+    x = b;
+    y = a;
   }
 
   for (i = 0, n = x.length; i < n; i++) {
-  	index = y.indexOf(x[i]);
+    index = y.indexOf(x[i]);
 
-  	if (index > -1) {
-  		same.push(x[i]);
-  	}
+    if (index > -1) {
+      same.push(x[i]);
+    }
 
-  	while (index > -1) {
-  		y.splice(index, 1);
-  		index = y.indexOf(x[i]);
-  	}
+    while (index > -1) {
+      y.splice(index, 1);
+      index = y.indexOf(x[i]);
+    }
   }
 
   return same;
