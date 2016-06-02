@@ -35,7 +35,7 @@
     var c = [];
   
     if (i === -1) {
-      return false;
+    return false;
     }
   
     while (i + n < strLen) {
@@ -47,15 +47,15 @@
   
       if (o.length > 0 && o.length === c.length) {
         return {
-  				index : i + 1,
-  				length : n - 1,
-  				value : string.substr(i + 1, n - 1),
+          index : i + 1,
+          length : n - 1,
+          value : string.substr(i + 1, n - 1),
           capture : {
             index : i,
             length : n + 1,
             value : string.substr(i, n + 1)
           }
-  			};
+        };
       }
   
       n++;
