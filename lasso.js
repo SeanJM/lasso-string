@@ -1,20 +1,37 @@
+arrayTag = '[object Array]';
+
+function Lasso (string) {
+  this.value = string;
+}
+
 function lasso (string) {
-  return lasso.chain(string);
+  return new Lasso(string);
 }
 
-if (typeof module === 'object') {
-  module.exports = lasso;
+function isArray (array) {
+  return Object.prototype.toString.call(array) === arrayTag;
 }
 
-lasso.between = function (string, start, end) {
-  var i, n, r, o, c, strLen;
+function map (array, iterator) {
+  var i = 0;
+  var n = array.length;
+  var val = [];
 
-  string = string.trim();
-  strLen = string.length;
-  i = string.indexOf(start);
-  n = 0;
-  o = [];
-  c = [];
+  if (isArray(array)) {
+    for (; i < n; i++) {
+      val.push(iterator(array[i], i));
+    }
+  }
+
+  return val;
+}
+
+function between (string, start, end) {
+  var strLen = string.length;
+  var i = string.indexOf(start);
+  var n = 0;
+  var o = [];
+  var c = [];
 
   if (i === -1) {
     return false;
@@ -44,33 +61,39 @@ lasso.between = function (string, start, end) {
   }
 
   return false;
-};
+}
 
-lasso.camelCase = function (string, start, length, newString) {
-  if (typeof string === 'string' && string.length) {
-    string = string
-    	.replace(/[\-]+/g, ' ')
-      .trim()
-      .replace(/[A-Z][a-z0-9]+/g, function (a) {
-      	return ' ' + a;
-      })
-      .match(/[a-zA-Z0-9\. ]/g)
-      .join('')
-      .replace(/\./g, '_')
-      .split(' ')
-      .filter(function (a) { return a.length; })
-      .map(function (a, i) {
-        if (i === 0) {
-          return a.toLowerCase();
-        }
-        return a[0].toUpperCase() + a.substr(1, a.length).toLowerCase();
-	    })
-      .join('');
-  }
-  return string;
-};
+function camelCase (string) {
+  return string.replace(/[-\._]+|\s+/g, ' ').trim()
 
-lasso.differentWords = function (a, b) {
+  .replace(/[A-Z][a-z0-9]+/g, function (a, i) {
+  	return i > 0 ? ' ' + a : a;
+  })
+
+  .match(/[A-Za-z0-9 ]/g).join('').split(' ')
+
+  .map(function (a, i) {
+    return i === 0 ? a.toLowerCase() : capitalize(a);
+  })
+
+  .join('');
+}
+
+function capitalize (string) {
+  return map(string.trim().split(' '), function (a, i) {
+    // If it's the first word, capitalize it
+    if (i === 0) {
+      return a[0].toUpperCase() + a.substr(1).toLowerCase();
+    } else if (/^A-Z/.test(a)) {
+      // If the word starts capitalized, don't change it.
+      return a;
+    }
+
+    return a.toLowerCase();
+  }).join(' ');
+}
+
+function differentWords (a, b) {
 	var z = [];
 	var index;
 	var x;
@@ -79,8 +102,10 @@ lasso.differentWords = function (a, b) {
 	var n;
 	var j;
 	var m;
+
 	a = a.match(/[a-zA-Z0-9 ]+/g).join(' ').replace(/[ ]+/g, ' ').split(' ');
 	b = b.match(/[a-zA-Z0-9 ]+/g).join(' ').replace(/[ ]+/g, ' ').split(' ');
+
 	for (i = 0, n = a.length; i < n; i++) {
 		index = b.indexOf(a[i]);
 		if (index === -1) {
@@ -91,6 +116,7 @@ lasso.differentWords = function (a, b) {
 			index = b.indexOf(a[i]);
 		}
 	}
+
 	for (i = 0, n = b.length; i < n; i++) {
 		index = a.indexOf(b[i]);
 		if (index === -1 && z.indexOf(b[i]) === -1) {
@@ -102,7 +128,7 @@ lasso.differentWords = function (a, b) {
 		}
 	}
 	return z;
-};
+}
 
 /*
   Copyright (c) 2011 Andrei Mackenzie
@@ -113,25 +139,33 @@ lasso.differentWords = function (a, b) {
   https://gist.github.com/andrei-m/982927
 */
 
-lasso.distance = function(a, b) {
+function distance (a, b) {
   var matrix = [];
   var i;
   var j;
+
   if (a.length === 0) {
     return b.length;
   }
+
   if (b.length === 0) {
     return a.length;
   }
+
   // increment along the first column of each row
+
   for (i = 0; i <= b.length; i++) {
     matrix[i] = [i];
   }
+
   // increment each column in the first row
+
   for (j = 0; j <= a.length; j++) {
     matrix[0][j] = j;
   }
+
   // Fill in the rest of the matrix
+
   for (i = 1; i <= b.length; i++) {
     for (j = 1; j <= a.length; j++) {
       if (b.charAt(i - 1) === a.charAt(j - 1)) {
@@ -141,44 +175,58 @@ lasso.distance = function(a, b) {
       }
     }
   }
-  return matrix[b.length][a.length];
-};
 
-lasso.fuzzy = function(a, b) {
+  return matrix[b.length][a.length];
+}
+
+function ellipsis (string, length) {
+  return string.length > length ? trimEnd(string.substr(0, length)) + '...' : string;
+}
+
+function fuzzy (a, b) {
   var index = a.indexOf(b[0]);
 	var opt = [];
   var n = 0;
   var o;
+
   opt.distance = 0;
   opt.closest = a.length;
   opt.farthest = 0;
+
   while (index > -1) {
     o = {
       index : index + n,
       length : 1,
       match : b[opt.length]
     };
+
     opt.push(o);
+
     opt.distance = o.index - opt[0].index;
     n = index;
     index = a.substr(n, a.length - n).indexOf(b[opt.length]);
+
     if (index > -1 && index + n - o.index < opt.closest) {
       opt.closest = index + n - o.index;
     }
+
     if (n - index > opt.farthest) {
       opt.farthest = n - index;
     }
   }
+
   if (opt.length === b.length) {
     opt.difference = opt.farthest - opt.closest;
     return opt;
   }
-  return false;
-};
 
-lasso.group = function (string, start, length, newString) {
-  var s = string.toString().split('.');
-  var n = s[0].split('').reverse();
+  return false;
+}
+
+function group (string) {
+  var s = string.toString().match(/[\d\.]/g).join('').split('.');
+  var n = s[0].replace(/\s/g, '').split('').reverse();
+
   if (n.length > 3) {
     for (var i = n.length; i >= 0; i--) {
       if (i < n.length && i > 0 && i % 3 === 0) {
@@ -186,54 +234,66 @@ lasso.group = function (string, start, length, newString) {
       }
     }
   }
+
   if (s.length === 2) {
     return n.reverse().join('') + '.' + s.slice(1).join('.');
   }
-  return n.reverse().join('');
-};
 
-lasso.indexesOf = function (string, match) {
+  return n.reverse().join('');
+}
+
+function indexesOf (string, match) {
   var index   = 0;
   var indexes = [];
   var max     = string.length;
   var currentIndex;
+
   if (arguments.length !== 2) {
     throw 'Error (lasso.indexesOf): Missing Arguments';
   }
+
   function isRegularExpression() {
     var matched = match.exec(string.substr(0, max));
+
     while (matched) {
       currentIndex = matched.index;
+
       indexes.push({
         index : index + currentIndex,
         length : matched[0].length,
         match : matched[0]
       });
+
       index += currentIndex + matched[0].length;
       matched = match.exec(string.substr(index, max - index));
     }
   }
+
   function isString() {
     currentIndex = string.substr(index, max - index).indexOf(match);
+
     while (currentIndex !== -1 && index < max) {
       indexes.push({
         index : index + currentIndex,
         length : match.length,
         match : match
       });
-      index        += currentIndex + match.length;
+
+      index += currentIndex + match.length;
       currentIndex  = string.substr(index, max - index).indexOf(match);
     }
   }
+
   if (typeof match === 'string') {
     isString();
   } else if (typeof match.test === 'function') {
     isRegularExpression();
   }
-  return indexes;
-};
 
-lasso.matchType = function (string) {
+  return indexes;
+}
+
+function matchType (string) {
   var type;
   var match = [''];
   var matchIndex = 0;
@@ -253,7 +313,7 @@ lasso.matchType = function (string) {
     if (/[\$\%\^\*\#\@\&\+\=]/.test(chr)) {
       return 4;
     }
-    if (/[\[\]\{\}\(\)\<\>\"\']/.test(chr)) {
+    if (/[\[\]\{\}\(\)<>\"\']/.test(chr)) {
       return 5;
     }
     return 6;
@@ -268,9 +328,9 @@ lasso.matchType = function (string) {
     type = typeIndex(string[i]);
   }
   return match;
-};
+}
 
-lasso.sameWords = function (a, b) {
+function sameWords (a, b) {
   var same = [];
 	var index;
 	var x;
@@ -279,90 +339,225 @@ lasso.sameWords = function (a, b) {
 	var n;
 	var j;
 	var m;
-	a = a.match(/[a-zA-Z0-9 ]+/g).join(' ').replace(/[ ]+/g, ' ').split(' ');
+
+  a = a.match(/[a-zA-Z0-9 ]+/g).join(' ').replace(/[ ]+/g, ' ').split(' ');
 	b = b.match(/[a-zA-Z0-9 ]+/g).join(' ').replace(/[ ]+/g, ' ').split(' ');
 	x = a;
 	y = b;
+
 	if (a.length < b.length) {
 		x = b;
 		y = a;
 	}
-	for (i = 0, n = x.length; i < n; i++) {
+
+  for (i = 0, n = x.length; i < n; i++) {
 		index = y.indexOf(x[i]);
-		if (index > -1) {
+
+  	if (index > -1) {
 			same.push(x[i]);
 		}
-		while (index > -1) {
+
+  	while (index > -1) {
 			y.splice(index, 1);
 			index = y.indexOf(x[i]);
 		}
 	}
-	return same;
-};
 
-lasso.splice = function (string, start, length, newString) {
+  return same;
+}
+
+function splice (string, start, length, newString) {
   return string.substr(0, start) + newString + string.substr(start + length, string.length - start - length);
-};
+}
 
-lasso.template = function (string) {
-  var s = [].slice.call(arguments, 1, arguments.length);
+function template (string) {
   var i = 0;
-  return string.replace(/(?:%s|%([0-9]+))/g, function (a, b) {
-    if (b) {
-      return s[Number(b)];
-    }
-    i += 1;
-    return s[i - 1];
-  });
-};
+  var n = arguments.length - 1;
+  var a = new Array(n);
 
-lasso.toChar = function (code) {
+  for (; i < n; i++) {
+    a[i] = arguments[i + 1];
+  }
+
+  i = 0;
+
+  return string.replace(/(?:%s|%([0-9]+))/g, function (x, b) {
+    i += 1;
+    return b ? a[Number(b)] : a[i - 1];
+  });
+}
+
+function toChar (code) {
   if (Array.isArray(code)) {
     return code.map(function (a) {
       return String.fromCharCode(a);
     }).join('');
   }
   return String.fromCharCode(code);
-};
+}
 
-lasso.toCharCode = function (string) {
+function toCharCode (string) {
   return Array.prototype.map.call(string.split(''), function (a) {
     return a.charCodeAt(0);
   });
 };
 
-lasso.toCurrency = function (prefix, value) {
+function toCurrency (prefix, value) {
   if (arguments.length === 1) {
     value = prefix;
     prefix = '$';
   }
+
   if (value < 0 || value.toString()[0] === '-') {
     return '-' + prefix + lasso.group((Number(value) * -1).toFixed(2));
   }
+
   return prefix + lasso.group(Number(value).toFixed(2));
 };
 
-lasso.trimEnd = function (string) {
+function toPercentage (value) {
+  if (!value || value === Infinity) {
+    value = 0;
+  }
+
+  return value + '%';
+}
+
+function trimEnd (string) {
   return string.replace(/\s+$/, '');
 };
 
-lasso.trimStart = function (string) {
+function trimStart (string) {
   return string.replace(/^\s+/, '');
 };
 
-(function () {
-  var strung = {};
-  for (var k in lasso) {
-    strung[k] = function (k) {
-      return function () {
-        var a = [].slice.call(arguments);
-        strung.value = lasso[k].apply(null, [strung.value].concat(a));
-        return strung;
-      };
-    }(k);
+Lasso.prototype.between = function (start, end) {
+  this.value = between(this.value, start, end);
+  return this;
+};
+
+Lasso.prototype.camelCase = function () {
+  this.value = camelCase(this.value);
+  return this;
+};
+
+Lasso.prototype.capitalize = function () {
+  this.value = capitalize(this.value);
+  return this;
+};
+
+Lasso.prototype.differentWords = function (word) {
+  this.value = differentWords(this.value, word);
+  return this;
+};
+
+Lasso.prototype.distance = function (word) {
+  this.value = distance(this.value, word);
+  return this;
+};
+
+Lasso.prototype.fuzzy = function (word) {
+  this.value = fuzzy(this.value, word);
+  return this;
+};
+
+Lasso.prototype.group = function () {
+  this.value = group(this.value);
+  return this;
+};
+
+Lasso.prototype.indexesOf = function (match) {
+  this.value = indexesOf(this.value, match);
+  return this;
+};
+
+Lasso.prototype.matchType = function () {
+  this.value = matchType(this.value);
+  return this;
+};
+
+Lasso.prototype.sameWords = function (word) {
+  this.value = sameWords(this.value, word);
+  return this;
+};
+
+Lasso.prototype.splice = function (start, length, newString) {
+  this.value = sameWords(this.value, start, length, newString);
+  return this;
+};
+
+Lasso.prototype.template = function () {
+  var i = 0;
+  var n = arguments.length;
+  var a = new Array(n);
+
+  for (; i < n; i++) {
+    a[i] = arguments[i];
   }
-  lasso.chain = function (string) {
-    strung.value = string;
-    return strung;
-  };
-}());
+
+  this.value = template.apply(null, [this.value].concat(a));
+  return this;
+};
+
+Lasso.prototype.toChar = function () {
+  this.value = toChar(this.value);
+  return this;
+};
+
+Lasso.prototype.toCharCode = function () {
+  this.value = toCharCode(this.value);
+  return this;
+};
+
+Lasso.prototype.ellipsis = function (length) {
+  this.value = ellipsis(this.value, length);
+  return this;
+};
+
+Lasso.prototype.forEach = function (iterator) {
+  this.value = map(this.value, iterator);
+};
+
+lasso.between = between;
+
+lasso.camelCase = camelCase;
+
+lasso.differentWords = differentWords;
+
+lasso.distance = distance;
+
+lasso.ellipsis = ellipsis;
+
+lasso.fuzzy = fuzzy;
+
+lasso.group = group;
+
+lasso.indexesOf = indexesOf;
+
+lasso.matchType = matchType;
+
+lasso.sameWords = sameWords;
+
+lasso.splice = splice;
+
+lasso.template = template;
+
+lasso.toChar = toChar;
+
+lasso.toCharCode = toCharCode;
+
+lasso.toCurrency = toCurrency;
+
+lasso.toPercentage = toPercentage;
+
+lasso.trimEnd = trimEnd;
+
+lasso.trimStart = trimStart;
+
+// Check the environment
+
+if (typeof module === 'object') {
+  module.exports = lasso;
+} else if (typeof window === 'object') {
+  window.lasso = lasso;
+}

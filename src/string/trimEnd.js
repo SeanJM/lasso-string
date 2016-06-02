@@ -1,3 +1,3 @@
-lasso.trimEnd = function (string) {
+function trimEnd (string) {
   return string.replace(/\s+$/, '');
 };

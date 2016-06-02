@@ -1,7 +1,7 @@
-function lasso (string) {
-  return lasso.chain(string);
+function Lasso (string) {
+  this.value = string;
 }
 
-if (typeof module === 'object') {
-  module.exports = lasso;
+function lasso (string) {
+  return new Lasso(string);
 }

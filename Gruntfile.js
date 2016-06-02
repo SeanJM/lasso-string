@@ -1,48 +1,45 @@
+var fs = require('fs');
 var js = {};
-(function () {
-  var lib = {
-    main : [
-      'src/lasso.js',
-      'src/lasso.!(chain).js',
-      'src/lasso.chain.js',
-    ]
-  };
-  function get(files) {
-    var arr = [];
-    for (var i = 0, n = files.length; i < n; i++) {
-      arr = arr.concat(lib[files[i]]);
-    }
-    return arr;
-  }
-  js.main = get([
-    'main'
-  ]);
-})();
+
+js.all = [
+  'src/references.js',
+  'src/Lasso.js',
+  'src/shared/*.js',
+  'src/string/*.js',
+  'src/Lasso.prototype.js',
+  'src/methods.js',
+  'src/exports.js'
+];
+
 module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+
     uglify: {
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
         sourceMap: false,
-        mangle: true
+        mangle: false,
+        enclose : {}
       },
       main : {
         files: {
-          'lasso.min.js': js.main,
+          'lasso.min.js': js.all,
         }
       }
     },
+
     concat : {
       dist : {
-        src : js.main,
-        dest : 'lasso.js'
+        src : js.all,
+        dest : 'lasso.js',
       }
     },
+
     watch: {
       main : {
-        files: js.main,
+        files: js.all,
         tasks: ['uglify:main', 'concat'],
         options: {}
       }
@@ -55,4 +52,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   // Default task(s).
   grunt.registerTask('default', ['uglify', 'concat', 'watch']);
+
+  fs.readFile('lasso.js', 'utf8', function (err, src) {
+    var t = src.match(/^\s+/m)[0];
+    var v = src.split('\n').map(function (a) { return t + a; }).join('\n');
+    var s = '(function () {\n' + v + '\n}());';
+    fs.writeFile('lasso.js', s);
+  });
 };

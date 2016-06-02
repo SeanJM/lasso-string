@@ -1,4 +1,4 @@
-lasso.matchType = function (string) {
+function matchType (string) {
   var type;
   var match = [''];
   var matchIndex = 0;
@@ -18,7 +18,7 @@ lasso.matchType = function (string) {
     if (/[\$\%\^\*\#\@\&\+\=]/.test(chr)) {
       return 4;
     }
-    if (/[\[\]\{\}\(\)\<\>\"\']/.test(chr)) {
+    if (/[\[\]\{\}\(\)<>\"\']/.test(chr)) {
       return 5;
     }
     return 6;
@@ -33,4 +33,4 @@ lasso.matchType = function (string) {
     type = typeIndex(string[i]);
   }
   return match;
-};
+}

@@ -1,12 +1,9 @@
-lasso.between = function (string, start, end) {
-  var i, n, r, o, c, strLen;
-
-  string = string.trim();
-  strLen = string.length;
-  i = string.indexOf(start);
-  n = 0;
-  o = [];
-  c = [];
+function between (string, start, end) {
+  var strLen = string.length;
+  var i = string.indexOf(start);
+  var n = 0;
+  var o = [];
+  var c = [];
 
   if (i === -1) {
     return false;
@@ -36,4 +33,4 @@ lasso.between = function (string, start, end) {
   }
 
   return false;
-};
+}
