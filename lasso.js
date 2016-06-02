@@ -95,40 +95,40 @@
   }
   
   function differentWords (a, b) {
-  	var z = [];
-  	var index;
-  	var x;
-  	var y;
-  	var i;
-  	var n;
-  	var j;
-  	var m;
+    var z = [];
+    var index;
+    var x;
+    var y;
+    var i;
+    var n;
+    var j;
+    var m;
   
-  	a = a.match(/[a-zA-Z0-9 ]+/g).join(' ').replace(/[ ]+/g, ' ').split(' ');
-  	b = b.match(/[a-zA-Z0-9 ]+/g).join(' ').replace(/[ ]+/g, ' ').split(' ');
+    a = a.match(/[a-zA-Z0-9 ]+/g).join(' ').replace(/[ ]+/g, ' ').split(' ');
+    b = b.match(/[a-zA-Z0-9 ]+/g).join(' ').replace(/[ ]+/g, ' ').split(' ');
   
-  	for (i = 0, n = a.length; i < n; i++) {
-  		index = b.indexOf(a[i]);
-  		if (index === -1) {
-  			z.push(a[i]);
-  		}
-  		while (index > -1) {
-  			b.splice(index, 1);
-  			index = b.indexOf(a[i]);
-  		}
-  	}
+    for (i = 0, n = a.length; i < n; i++) {
+    	index = b.indexOf(a[i]);
+    	if (index === -1) {
+    		z.push(a[i]);
+    	}
+    	while (index > -1) {
+    		b.splice(index, 1);
+    		index = b.indexOf(a[i]);
+    	}
+    }
   
-  	for (i = 0, n = b.length; i < n; i++) {
-  		index = a.indexOf(b[i]);
-  		if (index === -1 && z.indexOf(b[i]) === -1) {
-  			z.push(b[i]);
-  		}
-  		while (index > -1) {
-  			a.splice(index, 1);
-  			index = a.indexOf(b[i]);
-  		}
-  	}
-  	return z;
+    for (i = 0, n = b.length; i < n; i++) {
+    	index = a.indexOf(b[i]);
+    	if (index === -1 && z.indexOf(b[i]) === -1) {
+    		z.push(b[i]);
+    	}
+    	while (index > -1) {
+    		a.splice(index, 1);
+    		index = a.indexOf(b[i]);
+    	}
+    }
+    return z;
   }
   
   /*
@@ -333,36 +333,36 @@
   
   function sameWords (a, b) {
     var same = [];
-  	var index;
-  	var x;
-  	var y;
-  	var i;
-  	var n;
-  	var j;
-  	var m;
+    var index;
+    var x;
+    var y;
+    var i;
+    var n;
+    var j;
+    var m;
   
     a = a.match(/[a-zA-Z0-9 ]+/g).join(' ').replace(/[ ]+/g, ' ').split(' ');
-  	b = b.match(/[a-zA-Z0-9 ]+/g).join(' ').replace(/[ ]+/g, ' ').split(' ');
-  	x = a;
-  	y = b;
+    b = b.match(/[a-zA-Z0-9 ]+/g).join(' ').replace(/[ ]+/g, ' ').split(' ');
+    x = a;
+    y = b;
   
-  	if (a.length < b.length) {
-  		x = b;
-  		y = a;
-  	}
+    if (a.length < b.length) {
+    	x = b;
+    	y = a;
+    }
   
     for (i = 0, n = x.length; i < n; i++) {
-  		index = y.indexOf(x[i]);
+    	index = y.indexOf(x[i]);
   
     	if (index > -1) {
-  			same.push(x[i]);
-  		}
+    		same.push(x[i]);
+    	}
   
     	while (index > -1) {
-  			y.splice(index, 1);
-  			index = y.indexOf(x[i]);
-  		}
-  	}
+    		y.splice(index, 1);
+    		index = y.indexOf(x[i]);
+    	}
+    }
   
     return same;
   }
