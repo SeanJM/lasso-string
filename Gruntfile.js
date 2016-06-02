@@ -54,8 +54,8 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['uglify', 'concat', 'watch']);
 
   fs.readFile('lasso.js', 'utf8', function (err, src) {
-    var t = src.match(/^\s+/m)[0];
-    var v = src.split('\n').map(function (a) { return t + a; }).join('\n');
+    var tab = src.match(/^[ ]+|\t+/m)[0];
+    var v = src.split('\n').map(function (a) { return tab + a; }).join('\n');
     var s = '(function () {\n' + v + '\n}());';
     fs.writeFile('lasso.js', s);
   });
