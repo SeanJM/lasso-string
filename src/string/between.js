@@ -6,7 +6,7 @@ function between (string, start, end) {
   var c = [];
 
   if (i === -1) {
-  return false;
+    return false;
   }
 
   while (i + n < strLen) {
