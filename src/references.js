@@ -1,1 +1,1 @@
-arrayTag = '[object Array]';
+var arrayTag = '[object Array]';
