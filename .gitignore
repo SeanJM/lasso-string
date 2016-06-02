@@ -1,2 +1,4 @@
 node_modules
 lasso.min.microtest.js
+
+npm-debug.log
