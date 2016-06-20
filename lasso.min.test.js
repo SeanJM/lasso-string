@@ -181,4 +181,8 @@ describe('Testing the string functions', function () {
   it('lasso trimStartUntil: return a string with the starting characters removed until a match', function () {
     lasso.trimStartUntil('this is short', ' ').should.eql(' is short');
   });
+
+  it('lasso trimStartUntil (regExp): return a string with the starting characters removed until a match', function () {
+    lasso.trimStartUntil('this is short', / /).should.eql(' is short');
+  });
 });

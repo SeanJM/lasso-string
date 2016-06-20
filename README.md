@@ -202,8 +202,13 @@ var match = lasso.trimEnd('Love   ');
 ### Trim Start Until
 
 ```javascript
-  var match = lasso.trimStartUntil('Love this', ' ');
-  // -> ' this'
+  var match = lasso.trimStartUntil('Love this', 't');
+  // -> 'this'
+```
+
+```javascript
+  var match = lasso.trimStartUntil('Love this', /t/);
+  // -> 'this'
 ```
 
 
