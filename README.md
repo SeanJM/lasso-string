@@ -188,7 +188,7 @@ lasso.toPercentage(10);
 
 ```javascript
 var match = lasso.trimEnd('Love   ');
-// -> Love
+// -> 'Love'
 ```
 
 
@@ -196,7 +196,14 @@ var match = lasso.trimEnd('Love   ');
 
 ```javascript
   var match = lasso.trimStart('   Love');
-  // -> Love
+  // -> 'Love'
+```
+
+### Trim Start Until
+
+```javascript
+  var match = lasso.trimStartUntil('Love this', ' ');
+  // -> ' this'
 ```
 
 

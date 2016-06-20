@@ -177,4 +177,8 @@ describe('Testing the string functions', function () {
   it('lasso ellipsis: return ellipsis text (more than length)', function () {
     lasso.ellipsis('this is short', 8).should.eql('this is...');
   });
+
+  it('lasso trimStartUntil: return a string with the starting characters removed until a match', function () {
+    lasso.trimStartUntil('this is short', ' ').should.eql(' is short');
+  });
 });

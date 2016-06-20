@@ -9,4 +9,4 @@ function toCurrency (prefix, value) {
   }
 
   return prefix + lasso.group(Number(value).toFixed(2));
-};
+}

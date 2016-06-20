@@ -23,6 +23,11 @@ Lasso.prototype.distance = function (word) {
   return this;
 };
 
+Lasso.prototype.ellipsis = function (length) {
+  this.value = ellipsis(this.value, length);
+  return this;
+};
+
 Lasso.prototype.fuzzy = function (word) {
   this.value = fuzzy(this.value, word);
   return this;
@@ -76,8 +81,28 @@ Lasso.prototype.toCharCode = function () {
   return this;
 };
 
-Lasso.prototype.ellipsis = function (length) {
-  this.value = ellipsis(this.value, length);
+Lasso.prototype.toCurrency = function (symbol) {
+  this.value = toCurrency(symbol, this.value);
+  return this;
+};
+
+Lasso.prototype.toPercentage = function () {
+  this.value = toPercentage(this.value);
+  return this;
+};
+
+Lasso.prototype.trimEnd = function () {
+  this.value = trimEnd(this.value);
+  return this;
+};
+
+Lasso.prototype.trimStart = function () {
+  this.value = trimStart(this.value);
+  return this;
+};
+
+Lasso.prototype.trimStartUntil = function (until) {
+  this.value = trimStartUntil(this.value, until);
   return this;
 };
 

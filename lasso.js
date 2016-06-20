@@ -418,7 +418,7 @@
     }
   
     return prefix + lasso.group(Number(value).toFixed(2));
-  };
+  }
   
   function toPercentage (value) {
     if (!value || value === Infinity) {
@@ -435,6 +435,13 @@
   function trimStart (string) {
     return string.replace(/^\s+/, '');
   };
+  
+  function trimStartUntil(str, match) {
+    while (str[0] !== match && str.length) {
+      str = str.substr(1);
+    }
+    return str;
+  }
   
   Lasso.prototype.between = function (start, end) {
     this.value = between(this.value, start, end);
@@ -458,6 +465,11 @@
   
   Lasso.prototype.distance = function (word) {
     this.value = distance(this.value, word);
+    return this;
+  };
+  
+  Lasso.prototype.ellipsis = function (length) {
+    this.value = ellipsis(this.value, length);
     return this;
   };
   
@@ -514,8 +526,28 @@
     return this;
   };
   
-  Lasso.prototype.ellipsis = function (length) {
-    this.value = ellipsis(this.value, length);
+  Lasso.prototype.toCurrency = function (symbol) {
+    this.value = toCurrency(symbol, this.value);
+    return this;
+  };
+  
+  Lasso.prototype.toPercentage = function () {
+    this.value = toPercentage(this.value);
+    return this;
+  };
+  
+  Lasso.prototype.trimEnd = function () {
+    this.value = trimEnd(this.value);
+    return this;
+  };
+  
+  Lasso.prototype.trimStart = function () {
+    this.value = trimStart(this.value);
+    return this;
+  };
+  
+  Lasso.prototype.trimStartUntil = function (until) {
+    this.value = trimStartUntil(this.value, until);
     return this;
   };
   
@@ -558,6 +590,8 @@
   lasso.trimEnd = trimEnd;
   
   lasso.trimStart = trimStart;
+  
+  lasso.trimStartUntil = trimStartUntil;
   
   // Check the environment
   
