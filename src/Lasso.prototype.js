@@ -8,8 +8,8 @@ Lasso.prototype.camelCase = function () {
   return this;
 };
 
-Lasso.prototype.capitalize = function () {
-  this.value = capitalize(this.value);
+Lasso.prototype.capitalCase = function () {
+  this.value = capitalCase(this.value);
   return this;
 };
 

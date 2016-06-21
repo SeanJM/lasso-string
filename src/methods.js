@@ -2,7 +2,7 @@ lasso.between = between;
 
 lasso.camelCase = camelCase;
 
-lasso.capitalize = capitalize;
+lasso.capitalCase = capitalCase;
 
 lasso.differentWords = differentWords;
 

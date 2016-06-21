@@ -17,10 +17,10 @@ lasso.camelCase('Let\'s JavaScript case this thing');
 // -> letsJavascriptCaseThisThing
 ```
 
-### .capitalize
+### .capitalCase
 ```javascript
-lasso.capitalize('let\'s JavaScript case this thing');
-// -> Let's javascript case this thing
+lasso.capitalCase('let\'s CapitalCase this thing');
+// -> Let's CapitalCase This Thing
 ```
 
 ### .differentWords

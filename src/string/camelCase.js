@@ -8,7 +8,7 @@ function camelCase (string) {
   .match(/[A-Za-z0-9 ]/g).join('').split(' ')
 
   .map(function (a, i) {
-    return i === 0 ? a.toLowerCase() : capitalize(a);
+    return i === 0 ? a.toLowerCase() : capitalCase(a);
   })
 
   .join('') : string;
