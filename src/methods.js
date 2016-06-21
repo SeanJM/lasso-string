@@ -2,6 +2,8 @@ lasso.between = between;
 
 lasso.camelCase = camelCase;
 
+lasso.capitalize = capitalize;
+
 lasso.differentWords = differentWords;
 
 lasso.distance = distance;

@@ -14,6 +14,10 @@ describe('Testing the string functions', function () {
     lasso.camelCase('-js-qiktracker-button--close').should.equal('jsQiktrackerButtonClose');
   });
 
+  it('lasso.capitalize: Capitalcase a word or sentence', function () {
+    lasso.capitalize('Let\'s CapitalCase this thing').should.equal('Let\'s CapitalCase This Thing');
+  });
+
   it('lasso.splice: Splices a string into another string', function () {
     lasso.splice('AB', 1, 0, '-text-').should.equal('A-text-B');
   });
