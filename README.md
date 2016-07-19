@@ -8,7 +8,7 @@
 
 ```javascript
 lasso.between('This) is (between)', '(', ')');
-// -> { length: 7, index: 10, capture: { index: 9, length: 9, value: '(between)' }, value: 'between' }
+// -> [ '(between)', 'between' ]
 ```
 
 ### .camelCase

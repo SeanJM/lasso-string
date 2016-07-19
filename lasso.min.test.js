@@ -55,16 +55,7 @@ describe('Testing the string functions', function () {
   });
 
   it('lasso.between: Returns a string between 2 characters', function () {
-    lasso.between('This) is (between)', '(', ')').should.eql({
-      length: 7,
-      index: 10,
-      value: 'between',
-      capture : {
-        index : 9,
-        length : 9,
-        value : '(between)'
-      }
-    });
+    lasso.between('This) is (between)', '(', ')').should.eql(['(between)', 'between']);
   });
 
   it('lasso chain: Chain lasso functions together', function () {
