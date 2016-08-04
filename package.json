@@ -2,7 +2,7 @@
   "name": "lasso-string",
   "title": "Lasso",
   "description": "A function with methods to manipulate strings and get information about strings.",
-  "version": "2.48.0",
+  "version": "5.0.0",
   "author": {
     "name": "Sean MacIsaac",
     "email": "seanjmacisaac@gmail.com"
@@ -26,13 +26,15 @@
   },
   "homepage": "https://github.com/SeanJM/rope",
   "devDependencies": {
-    "chai": "^3.4.1",
     "grunt": "^0.4.5",
     "grunt-autoprefixer": "^1.0.0",
     "grunt-cli": "^0.1.13",
     "grunt-contrib-concat": "^0.5.1",
     "grunt-contrib-uglify": "~0.5.0",
-    "grunt-contrib-watch": "^0.6.1",
-    "mocha": "^2.3.4"
+    "grunt-contrib-watch": "^0.6.1"
+  },
+  "dependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3"
   }
 }
