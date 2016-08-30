@@ -109,3 +109,8 @@ Lasso.prototype.trimStartUntil = function (until) {
 Lasso.prototype.forEach = function (iterator) {
   this.value = map(this.value, iterator);
 };
+
+Lasso.prototype.len = function () {
+  this.value = this.value.length;
+  return this;
+};

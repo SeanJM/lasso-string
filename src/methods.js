@@ -37,3 +37,5 @@ lasso.trimEnd = trimEnd;
 lasso.trimStart = trimStart;
 
 lasso.trimStartUntil = trimStartUntil;
+
+lasso.len = len;
