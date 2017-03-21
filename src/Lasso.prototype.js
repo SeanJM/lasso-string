@@ -1,5 +1,5 @@
 Lasso.prototype.between = function (start, end) {
-  this.value = between(this.value, start, end);
+  this.value = between(start, end, this.value);
   return this;
 };
 

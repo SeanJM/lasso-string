@@ -17,7 +17,7 @@
     "string",
     "manipulation"
   ],
-  "main": "lasso.min.js",
+  "main": "lasso.js",
   "bugs": {
     "url": "https://github.com/SeanJM/rope/issues"
   },
