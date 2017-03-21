@@ -7,8 +7,13 @@
 ### .between
 
 ```javascript
-lasso.between('This) is (between)', '(', ')');
-// -> [ '(between)', 'between' ]
+lasso.between('(', ')', 'This) is (between)');
+// -> {
+        start : 9,
+        end : 17,
+        length : 7,
+        value : 'between'
+      }
 ```
 
 ### .camelCase
