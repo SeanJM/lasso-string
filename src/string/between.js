@@ -21,7 +21,7 @@ function between(a, b, string, index) {
 
     if (o === 0) {
       return {
-        start : start,
+        start : start + 1,
         end : i,
         length : i - start,
         value : string.substring(start + 1, i)
