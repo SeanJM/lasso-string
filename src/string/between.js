@@ -1,6 +1,6 @@
-function between(a, b, string) {
+function between(a, b, string, index) {
   var o = 0;
-  var i = 0;
+  var i = index || 0;
   var n = string.length;
   var start;
   var alen = a.length;
