@@ -16,6 +16,16 @@ lasso.between('(', ')', 'This) is (between)');
       }
 ```
 
+```javascript
+lasso.between(/[a-z]+\(/, ')', 'This) is function(between)');
+// -> {
+        start : 18,
+        end : 25,
+        length : 16,
+        value : 'between'
+      }
+```
+
 ### .camelCase
 ```javascript
 lasso.camelCase('Let\'s JavaScript case this thing');

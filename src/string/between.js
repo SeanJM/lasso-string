@@ -31,7 +31,7 @@ function between(a, b, string, index) {
   alen = a.length;
   blen = b.length;
 
-  while (string[i] !== a && string[i]) {
+  while (string[i] && string.substring(i, i + alen) !== a) {
     i++;
   }
 
@@ -46,10 +46,10 @@ function between(a, b, string, index) {
 
     if (o === 0) {
       return {
-        start : start + 1,
+        start : start + alen,
         end : i,
         length : i - start,
-        value : string.substring(start + 1, i)
+        value : string.substring(start + alen, i)
       };
     }
   }

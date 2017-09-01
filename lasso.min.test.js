@@ -61,6 +61,13 @@ describe('Testing the string functions', function () {
     capture.value.should.eql('between');
   });
 
+  it('lasso.between (regexp): Returns a string between 2 characters', function () {
+    var capture = lasso.between(/function\(/, ')', 'This) is function(between)');
+    capture.start.should.eql(18);
+    capture.end.should.eql(25);
+    capture.value.should.eql('between');
+  });
+
   it('lasso chain: Chain lasso functions together', function () {
     lasso('this string').camelCase().toCharCode().value.should.eql([116, 104, 105, 115, 83, 116, 114, 105, 110, 103]);
   });

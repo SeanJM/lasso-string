@@ -60,7 +60,7 @@
     alen = a.length;
     blen = b.length;
   
-    while (string[i] !== a && string[i]) {
+    while (string[i] && string.substring(i, i + alen) !== a) {
       i++;
     }
   
@@ -75,17 +75,16 @@
   
       if (o === 0) {
         return {
-          start : start + 1,
+          start : start + alen,
           end : i,
           length : i - start,
-          value : string.substring(start + 1, i)
+          value : string.substring(start + alen, i)
         };
       }
     }
   
     return false;
   }
-  
   function camelCase (string) {
     return string.length ? string.replace(/[-\._]+|\s+/g, ' ').trim()
   
