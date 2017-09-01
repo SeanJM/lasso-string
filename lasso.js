@@ -32,8 +32,33 @@
     var i = index || 0;
     var n = string.length;
     var start;
-    var alen = a.length;
-    var blen = b.length;
+  
+    var alen;
+    var blen;
+    var t;
+  
+    if (a instanceof RegExp) {
+      t = string.match(a);
+  
+      if (!t) {
+        return false;
+      }
+  
+      a = t[0];
+    }
+  
+    if (b instanceof RegExp) {
+      t = string.match(b);
+  
+      if (!t) {
+        return false;
+      }
+  
+      b = t[0];
+    }
+  
+    alen = a.length;
+    blen = b.length;
   
     while (string[i] !== a && string[i]) {
       i++;
